@@ -1,25 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {Text, View, ScrollView, StyleSheet, Image} from 'react-native';
 
-const RecipeList = (props) => {
-  const { recipeList } = props;
-
-  const handleFavorite = (index) => {
-    const recipe = recipeList[index];
-    props.setFavoriteList([...props.favoriteList, recipe]);
-  };
+const FavoScreen = props => {
+  const {favoriteList} = props;
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Your Favorites</Text>
+        <Image style={styles.logo} source={require('../assets/images/FlavorFolioSmallIcon.png')} />
+      </View>
+
       <ScrollView style={styles.scrollviewstyle}>
-        {recipeList.map((recipe, index) => (
+        {favoriteList.map((recipe, index) => (
           <View style={styles.listItemStyle} key={index}>
             <View style={styles.recipeHeader}>
               <Text style={styles.recipeName}>{recipe.name}</Text>
-              <TouchableOpacity onPress={() => handleFavorite(index)}>
-                <Ionicons name="heart-outline" size={24} color="black" />
-              </TouchableOpacity>
             </View>
             <Text style={styles.recipeDescription}>{recipe.description}</Text>
             <View style={styles.ratingContainer}>
@@ -62,14 +58,34 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   recipeDescription: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 16,
     marginBottom: 5,
   },
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    position: 'relative',
+  },
+  headerText: {
+    fontSize: 26,
+    fontWeight: 'bold',
+  },
+  logo: {
+    width: 50,
+    height: 50,
+    position: 'absolute',
+    top: 20,
+    right: 20,
+  },
 });
 
-export default RecipeList;
+export default FavoScreen;
