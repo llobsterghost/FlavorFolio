@@ -2,16 +2,14 @@ import React from 'react';
 import {
   Button,
   StyleSheet,
-  Text,
   TextInput,
   View,
-  ScrollView,
   Image,
 } from 'react-native';
 import RecipeList from './RecipeList';
 
 const HomeScreen = props => {
-  const {recipeList} = props;
+  const {recipeList, favoriteList, setFavoriteList} = props;
   const [text, setText] = React.useState('');
   const textInputHandler = enteredText => {
     setText(enteredText);
@@ -22,7 +20,7 @@ const HomeScreen = props => {
       <View style={styles.header}>
         <Button
           title="Go to Favorites"
-          onPress={() => props.navigation.navigate('FavoritesScreen')}
+          onPress={() => props.navigation.navigate('Favorites')}
         />
         <Image
         style={styles.logo}
@@ -39,7 +37,10 @@ const HomeScreen = props => {
             value={text}
             placeholder="Search"
         />
-        <RecipeList recipeList={recipeList} />
+        <RecipeList recipeList={recipeList}
+        favoriteList={favoriteList}
+        setFavoriteList={setFavoriteList}
+         />
     </View>
   );
 };
