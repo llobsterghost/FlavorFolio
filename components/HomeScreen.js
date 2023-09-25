@@ -8,6 +8,7 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
+import RecipeList from './RecipeList';
 
 const HomeScreen = props => {
   const {recipeList} = props;
@@ -19,6 +20,10 @@ const HomeScreen = props => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+        <Button
+          title="Go to Favorites"
+          onPress={() => props.navigation.navigate('FavoritesScreen')}
+        />
         <Image
         style={styles.logo}
          source={require('../assets/images/FlavorFolioIcon.png')} 
@@ -34,20 +39,7 @@ const HomeScreen = props => {
             value={text}
             placeholder="Search"
         />
-
-      <View style={styles.listStyle}>
-        <ScrollView style={styles.scrollviewstyle}>
-          {recipeList.map((item, index) => {
-            return (
-              <View style={styles.listItemStyle} key={index}>
-                <Text>
-                  {index}: {item}
-                </Text>
-              </View>
-            );
-          })}
-        </ScrollView>
-      </View>
+        <RecipeList recipeList={recipeList} />
     </View>
   );
 };
