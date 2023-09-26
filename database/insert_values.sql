@@ -39,7 +39,7 @@ VALUES(2, 'Chocolate Pancakes', 'These fluffy chocolate pancakes are the perfect
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
 VALUES (3, 'Spicy Beef Tacos', 'Tasty and spicy beef tacos with fresh salsa and guacamole. Perfect for a casual dinner with friends.',
-        './assets/images/beef_tacos.png', 0, 4.7, 45, 'Moderate', 'Main dish',
+        './assets/images/spicy_beef_tacos.png', 0, 4.7, 45, 'Moderate', 'Main dish',
         '500g ground beef
         1 onion, finely chopped
         2 cloves garlic, minced
@@ -78,7 +78,7 @@ VALUES (4, 'Caprese Salad', 'A classic Italian salad with tomatoes, fresh mozzar
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
 VALUES (5, 'Chicken Alfredo Pasta', 'Creamy and indulgent chicken Alfredo pasta with a rich parmesan sauce.',
-        './assets/images/chicken_alfredo.png', 0, 4.5, 40, 'Moderate', 'Main dish',
+        './assets/images/chicken_alfredo_pasta.png', 0, 4.5, 40, 'Moderate', 'Main dish',
         '300g fettuccine pasta
         2 boneless, skinless chicken breasts
         2 tbsp butter

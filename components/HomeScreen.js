@@ -1,10 +1,9 @@
 import React from 'react';
 import {
-  Button,
   StyleSheet,
   TextInput,
   View,
-  Image,
+  Image, TouchableOpacity,
 } from 'react-native';
 import RecipeList from './RecipeList';
 
@@ -18,29 +17,46 @@ const HomeScreen = props => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Button
-          title="Go to Favorites"
-          onPress={() => props.navigation.navigate('Favorites')}
-        />
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Favorites')}>
+          <Image
+            style={styles.iconFavorites}
+            source={require('../assets/icons/IconFavoritePage.png')}
+          />
+        </TouchableOpacity>
         <Image
-        style={styles.logo}
-         source={require('../assets/images/FlavorFolioIcon.png')} 
-         />
-        <Button
-          title="Add recipe"
-          onPress={() => props.navigation.navigate('AddRecipe')}
+          style={styles.logo}
+          source={require('../assets/icons/FlavorFolioIcon.png')}
+        />
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('AddRecipe')}>
+          <Image
+            style={styles.iconAdd}
+            source={require('../assets/icons/IconAddPage.png')}
+          />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.backgroundInputField}>
+        <View style={styles.iconContainer}>
+          <Image
+            style={styles.iconSearch}
+            source={require('../assets/icons/IconSearch.png')}
+          />
+        </View>
+        <TextInput
+          style={styles.input}
+          onChangeText={textInputHandler}
+          value={text}
+          placeholder='Search for recipes...'
         />
       </View>
-        <TextInput
-            style={styles.input}
-            onChangeText={textInputHandler}
-            value={text}
-            placeholder="Search"
-        />
-        <RecipeList recipeList={recipeList}
-        favoriteList={favoriteList}
-        setFavoriteList={setFavoriteList}
-         />
+
+
+      <RecipeList recipeList={recipeList}
+                  favoriteList={favoriteList}
+                  setFavoriteList={setFavoriteList}
+      />
     </View>
   );
 };
@@ -56,7 +72,7 @@ const styles = StyleSheet.create({
   header: {
     width: '100%',
     flexDirection: 'row',
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
   },
@@ -66,13 +82,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
+    flex: 1,
+    borderWidth: 2,
+    borderColor: '#dadada',
+    borderRadius: 25,
     padding: 10,
-    width: '100%',
-    marginBottom: 20,
-    backgroundColor: '#fff',
+    width: 315,
+    height: 50,
+    backgroundColor: '#F9F9F9',
+    flexShrink: 0,
+    marginRight: 5,
   },
   button: {
     width: '100%',
@@ -87,7 +106,7 @@ const styles = StyleSheet.create({
   listStyle: {
     width: '100%',
     flex: 1,
-    backgroundColor : '#ccc',
+    backgroundColor: '#ccc',
   },
   listItemStyle: {
     padding: 10,
@@ -100,6 +119,33 @@ const styles = StyleSheet.create({
   logo: {
     width: 160,
     height: 80,
+  },
+  iconFavorites: {
+    width: 60,
+    height: 60,
+  },
+  iconAdd: {
+    width: 60,
+    height: 60,
+  },
+  iconSearch: {
+    width: 30,
+    height: 30,
+    flexShrink: 0,
+  },
+  backgroundInputField: {
+    width: 360,
+    height: 60,
+    flexShrink: 0,
+    backgroundColor: '#E6E6E6',
+    boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+    borderRadius: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconContainer: {
+    marginLeft: 10,
+    marginRight: 5,
   },
 });
 

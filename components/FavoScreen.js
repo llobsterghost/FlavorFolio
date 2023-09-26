@@ -8,7 +8,7 @@ const FavoScreen = props => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Your Favorites</Text>
-        <Image style={styles.logo} source={require('../assets/images/FlavorFolioSmallIcon.png')} />
+        <Image style={styles.logo} source={require('../assets/icons/FlavorFolioSmallIcon.png')} />
       </View>
 
       <ScrollView style={styles.scrollviewstyle}>
