@@ -7,9 +7,10 @@ const FavoScreen = props => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Your Favorites</Text>
+        <Image style={styles.yourfavoriteIcon} source={require('../assets/icons/YourFavoritesIcon.png')} />
         <Image style={styles.logo} source={require('../assets/icons/FlavorFolioSmallIcon.png')} />
       </View>
+
 
       <ScrollView style={styles.scrollviewstyle}>
         {favoriteList.map((recipe, index) => (
@@ -80,11 +81,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   logo: {
-    width: 50,
+    width: 40,
     height: 50,
     position: 'absolute',
     top: 20,
     right: 20,
+  },
+  yourfavoriteIcon:{
+    width: 250,
+    height: 40,
+    marginTop: 5,
   },
 });
 
