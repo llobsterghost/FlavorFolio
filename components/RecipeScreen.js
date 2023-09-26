@@ -34,15 +34,15 @@ const RecipeScreen = props => {
           </View>
         </View>
 
-        <View style={styles.infoContainer}>
-          <View style={styles.cookedContainer}>
-            <Text style={styles.cookedText}>
-              How many times have you cooked this meal?
-            </Text>
-            <Text style={styles.cookedCount}>{count}</Text>
-            <Button title="Cooked" onPress={handleCookedPress} />
-          </View>
+        <View style={styles.cookedContainer}>
+          <Text style={styles.cookedText}>
+            How many times have you cooked this meal?
+          </Text>
+          <Text style={styles.cookedCount}>{count}</Text>
+          <Button title="Cooked" onPress={handleCookedPress} />
+        </View>
 
+        <View style={styles.infoContainer}>
           <View style={styles.timeContainer}>
             <Image
               style={styles.timeIcon}
@@ -57,7 +57,7 @@ const RecipeScreen = props => {
               style={styles.levelIcon}
               source={require('../assets/icons/level.png')}
             />
-            <Text style={styles.levelText}>{recipe.level}</Text>
+            <Text style={styles.levelText}>{recipe.recipeLevel}</Text>
           </View>
 
           <View style={styles.typeContainer}>
@@ -65,7 +65,7 @@ const RecipeScreen = props => {
               style={styles.typeIcon}
               source={require('../assets/icons/type.png')}
             />
-            <Text style={styles.typeText}>{recipe.type}</Text>
+            <Text style={styles.typeText}>{recipe.recipeType}</Text>
           </View>
         </View>
 
