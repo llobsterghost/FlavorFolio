@@ -24,7 +24,7 @@ const HomeScreen = props => {
         />
         <Image
         style={styles.logo}
-         source={require('../assets/images/FlavorFolioIcon.png')} 
+         source={require('../assets/icons/FlavorFolioIcon.png')} 
          />
         <Button
           title="Add recipe"
