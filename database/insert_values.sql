@@ -1,4 +1,4 @@
-INSERT INTO RECIPE(ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+INSERT INTO recipe(ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
 VALUES (1, 'Penne al´ arrabiata', 'A spicy pasta al''arrabiata - or spicy tomato sauce to you and me - an easy storecupboard pasta dish for a weeknight supper.',
         './assets/images/penne_arrabiata.png', 0, 5, 30, 'Easy', 'Main dish',
         '6 tbsp extra virgin olive oil
@@ -16,7 +16,7 @@ VALUES (1, 'Penne al´ arrabiata', 'A spicy pasta al''arrabiata - or spicy tomat
         5. Drain the pasta and the tomato sauce to it. Serve with shavings of parmesan.\n'
 );
 
-INSERT INTO RECIPE(ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+INSERT INTO recipe(ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
 VALUES(2, 'Chocolate Pancakes', 'These fluffy chocolate pancakes are the perfect way for a chocolate lover to start their day! Thick and full of melty chocolate in each bite, this simple recipe gives you a good reason to get out of bed in the morning.',
         './assets/images/chocolate_pancakes.png', 0, 5, 40, 'Easy', 'Breakfast',
         ' 1 1/3 cups (185g) all-purpose flour
@@ -37,108 +37,191 @@ VALUES(2, 'Chocolate Pancakes', 'These fluffy chocolate pancakes are the perfect
 );
 
 
-INSERT INTO RECIPE(ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (3, 'Bruschetta', 'Bruschetta is a classic Italian appetizer that is easy to make at home. Toasted bread is topped with tomatoes, Parmesan cheese, garlic, and fresh basil. Use a high-quality balsamic vinegar for best results.',
-        './assets/images/bruschetta.png', 0, 5, 20, 'Easy', 'Appetizer',
-        '1 loaf French bread, cut into 1/4-inch slices' ||
-        '1 tablespoon extra-virgin olive oil' ||
-        '8 roma (plum) tomatoes, diced' ||
-        '⅓ cup chopped fresh basil' ||
-        '1 ounce Parmesan cheese, freshly grated' ||
-        '2 cloves garlic, minced' ||
-        '1 tablespoon good quality balsamic vinegar' ||
-        '2 teaspoons extra-virgin olive oil' ||
-        '¼ teaspoon kosher salt' ||
-        '¼ teaspoon freshly ground black pepper',
-        'Step 1: gather all ingredients\n' ||
-        'Step 2: Preheat oven to 400 degrees F (200 degrees C).\n' ||
-        'Step 3: Brush bread slices on both sides lightly with 1 tablespoon oil and place on large baking sheet. Toast bread until golden, 5 to 10 minutes, turning halfway through. \n' ||
-        'Step 4: Meanwhile, toss together tomatoes, basil, Parmesan cheese, and garlic in a bowl.\n' ||
-        'Step 5: Mix in balsamic vinegar, 2 teaspoons olive oil, kosher salt, and pepper.\n' ||
-        'Step 6: Spoon tomato mixture onto toasted bread slices.\n' ||
-        'Step 7: Serve immediately and enjoy!'
-);
-
-INSERT INTO RECIPE(ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (4, 'Vegetable Lasagne', 'This vegetarian lasagna is cheesy (of course), and loaded with vegetables, spinach and a simple tomato sauce. If you have any meatless-meal skeptics in your life, this lasagna will change their mind. I’m sure of it.',
-        './assets/images/vegetable_lasagne.png', 0, 5, 60, 'Medium', 'Main dish',
-        'Veggies and spinach \n' ||
-        '- 2 tablespoons extra-virgin olive oil \n' ||
-        '- 3 large carrots, chopped (about 1 cup) \n' ||
-        '- 1 red bell pepper, chopped \n' ||
-        '- 1 medium zucchini, chopped \n' ||
-        '- 1 medium yellow onion, chopped \n' ||
-        '- ¼ teaspoon salt \n' ||
-        '- 5 to 6 ounces baby spinach \n' ||
-        'Tomato sauce (or substitute 2 cups prepared marinara sauce) \n' ||
-        '- 1 large can (28 ounces) diced tomatoes \n' ||
-        '- ¼ cup roughly chopped fresh basil + additional for garnish \n' ||
-        '- 2 tablespoons extra-virgin olive oil \n' ||
-        '- 2 cloves garlic, pressed or minced \n' ||
-        '- ½ teaspoon salt \n' ||
-        '- ¼ teaspoon red pepper flakes \n' ||
-        'Remaining ingredients \n' ||
-        '- 2 cups (16 ounces) low-fat cottage cheese, divided \n' ||
-        '- ¼ teaspoon salt, to taste \n' ||
-        '- Freshly ground black pepper, to taste \n' ||
-        '- 9 no-boil lasagna noodles* \n' ||
-        '- 8 ounces (2 cups) freshly grated low-moisture, part-skim mozzarella cheese',
-        'Preparation Text is really long... here is the link: https://cookieandkate.com/best-vegetable-lasagna-recipe/'
-);
-
-INSERT INTO RECIPE(ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES(5, 'Sachertorte', 'When 16-year-old apprentice chef Franz Sacher created the Sachertorte cake at the court of Prince Metternich in 1832, little did he know the impact his cake would have on chocolate lovers worldwide. The recipe for the Original Sacher-Torte is a well-kept secret, known only to confectioners at Hotel Sacher in Vienna.',
-       './assets/images/sachertorte.png', 0, 5, 120, 'Hard', 'Dessert',
-       'For the cake: \n' ||
-           '- 7 egg yolks \n' ||
-           '- 150 g / 2/3 cup softened butter \n' ||
-           '- 125 g / 1 cup icing sugar \n' ||
-           '- 200 g / 7 oz dark chocolate \n' ||
-           '- 1 packet (8 g) vanilla sugar \n' ||
-           '- 7 egg whites \n' ||
-           '- 125 g / 1/2 cup crystal sugar \n' ||
-           '- A pinch of salt \n' ||
-           '- 150 g / 1 cup flour \n' ||
-           '- Butter and flour for the mould \n' ||
-           '- 150 – 200 g / 5 - 7 oz apricot jam, for spreading \n' ||
-           '- Rum (optional) \n' ||
-       'For the glaze: \n' ||
-            '- 200 g / 7 oz dark chocolate coating or cooking chocolate \n' ||
-            '- 250 g / 1 cup sugar \n' ||
-            '- 150 - 170 ml / 2/3 cup water',
-       'Step 1: \n' ||
-       ' Melt the chocolate slowly (ideally in a bain-marie). Meanwhile, mix the butter with the icing sugar and vanilla sugar until creamed. Gradually stir in the egg yolks. Pre-heat the oven to 180°C / 356°F.\n\n'
-       'Step 2: \n' ||
-       'Grease a cake tin with butter and sprinkle with flour. Whip up the egg whites with a pinch of salt, add the crystal sugar and beat to a stiff peak. Stir the melted chocolate into the paste with the egg yolks and fold in the whipped egg whites alternately with the flour. Fill the dough into the tin and bake for around 1 hour. \n\n' ||
-       'Step 3: \n' ||
-       'Remove the cake and leave to cool off (to achieve a flat surface turn the cake out on to a work surface immediately after baking and turn it again after 25 minutes).
-       If the apricot jam is too solid, heat it briefly, and stir until smooth, before flavouring with a shot of rum. Cut the cake in half crosswise. Cover the base with jam, set the other half on top, and coat the upper surface and around the edges with apricot jam. \n\n' ||
-       'Step 4:\n' ||
-       'For the glaze, break the chocolate into small pieces. Heat up the water with the sugar for a few minutes. Pour into a bowl and leave to cool down until just warm to the taste (if the glaze is too hot it will become dull in appearance, but if too cold it will become too viscous). Add the chocolate and dissolve in the sugar solution. Pour the glaze quickly, i.e. in a single action, over the cake and immediately spread it out and smooth it over the surface, using a palate knife or other broad-bladed knife. Leave the cake to dry at room temperature. \n\n
-        Serve with a garnish of whipped cream. If possible, do not store the Sachertorte in the fridge, as it will “sweat”.'
-);
-
-INSERT INTO RECIPE(ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES(6, 'Greek Salad', 'This easy Greek salad recipe is our new favorite summer side dish! Just 7 ingredients + a simple Greek salad dressing make it refreshing & delicious.',
-        './assets/images/greek_salad.png', 0, 5, 20, 'Easy', 'Appetizer',
-        'Dressing: \n' ||
-        '- ¼ cup extra-virgin olive oil \n' ||
-        '- 3 tablespoons red wine vinegar \n' ||
-        '- 1 garlic clove, minced \n' ||
-        '- ½ teaspoon dried oregano, more for sprinkling \n' ||
-        '- ¼ teaspoon Dijon mustard \n' ||
-        '- ¼ teaspoon sea salt \n' ||
-        '- Freshly ground black pepper \n' ||
-        'Salad: \n' ||
-        '- 1 English cucumber, cut lengthwise, seeded, and sliced ¼-inch thick \n' ||
-        '- 1 green bell pepper, chopped into 1-inch pieces \n' ||
-        '- 2 cups halved cherry tomatoes \n' ||
-        '- 5 ounces feta cheese, cut into ½ inch cubes* \n' ||
-        '- ⅓ cup thinly sliced red onion \n' ||
-        '- ⅓ cup pitted Kalamata olives \n' ||
-        '- ⅓ cup fresh mint leaves',
-        '1. Make the dressing: In a small bowl, whisk together the olive oil, vinegar, garlic, oregano, mustard, salt, and several grinds of pepper. \n' ||
-        '2. On a large platter, arrange the cucumber, green pepper, cherry tomatoes, feta cheese, red onions, and olives. Drizzle with the dressing and very gently toss. Sprinkle with a few generous pinches of oregano and top with the mint leaves. Season to taste and serve.'
-);
+INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+VALUES (3, 'Spicy Beef Tacos', 'Tasty and spicy beef tacos with fresh salsa and guacamole. Perfect for a casual dinner with friends.',
+        './assets/images/spicy_beef_tacos.png', 0, 4.7, 45, 'Moderate', 'Main dish',
+        '500g ground beef
+        1 onion, finely chopped
+        2 cloves garlic, minced
+        1 tsp chili powder
+        1 tsp cumin
+        Salt and pepper to taste
+        8 small taco shells
+        1 cup salsa
+        1 avocado, diced
+        Fresh cilantro leaves, for garnish',
+        '1. In a skillet, brown the ground beef over medium heat. Add the chopped onion and garlic and sauté until softened.
+        2. Stir in the chili powder and cumin. Season with salt and pepper to taste.
+        3. Warm the taco shells according to package instructions.
+        4. Fill each taco shell with the beef mixture.
+        5. Top with salsa, diced avocado, and fresh cilantro leaves.
+        6. Serve hot and enjoy your spicy beef tacos!'
+       );
 
 
+INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+VALUES (4, 'Caprese Salad', 'A classic Italian salad with tomatoes, fresh mozzarella, basil, and balsamic glaze. Light and delicious.',
+        './assets/images/caprese_salad.png', 0, 4.9, 15, 'Easy', 'Salad',
+        '4 ripe tomatoes, sliced
+        200g fresh mozzarella cheese, sliced
+        Fresh basil leaves
+        2 tbsp balsamic glaze
+        Salt and pepper to taste
+        Extra virgin olive oil',
+        '1. Arrange the tomato and mozzarella slices on a serving platter.
+        2. Tuck fresh basil leaves between the slices.
+        3. Drizzle with balsamic glaze and a splash of extra virgin olive oil.
+        4. Season with salt and pepper to taste.
+        5. Serve as a light and refreshing salad.'
+       );
+
+
+INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+VALUES (5, 'Chicken Alfredo Pasta', 'Creamy and indulgent chicken Alfredo pasta with a rich parmesan sauce.',
+        './assets/images/chicken_alfredo_pasta.png', 0, 4.5, 40, 'Moderate', 'Main dish',
+        '300g fettuccine pasta
+        2 boneless, skinless chicken breasts
+        2 tbsp butter
+        2 cloves garlic, minced
+        1 cup heavy cream
+        1 cup grated Parmesan cheese
+        Salt and pepper to taste
+        Fresh parsley, for garnish',
+        '1. Cook the fettuccine pasta according to package instructions until al dente.
+        2. Season chicken breasts with salt and pepper. In a skillet, cook chicken in butter until no longer pink in the center. Remove and slice.
+        3. In the same skillet, sauté minced garlic until fragrant. Stir in heavy cream and Parmesan cheese until the sauce thickens.
+        4. Toss cooked pasta with the Alfredo sauce and top with sliced chicken.
+        5. Garnish with fresh parsley and serve hot.'
+       );
+
+
+INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+VALUES (6, 'Grilled Vegetable Salad', 'A healthy and colorful salad with grilled vegetables and a zesty lemon vinaigrette.',
+        './assets/images/grilled_vegetable_salad.png', 0, 4.8, 25, 'Easy', 'Salad',
+        'Assorted vegetables (bell peppers, zucchini, eggplant, cherry tomatoes)
+        Olive oil
+        Salt and pepper to taste
+        Mixed greens
+        1 lemon, juiced
+        2 tbsp olive oil
+        1 tsp Dijon mustard
+        1 clove garlic, minced
+        Fresh herbs (e.g., basil, thyme), for garnish',
+        '1. Preheat the grill. Brush vegetables with olive oil and season with salt and pepper.
+        2. Grill vegetables until tender and slightly charred.
+        3. In a small bowl, whisk together lemon juice, olive oil, Dijon mustard, and minced garlic to make the vinaigrette.
+        4. Arrange mixed greens on a platter and top with grilled vegetables.
+        5. Drizzle with lemon vinaigrette and garnish with fresh herbs.
+        6. Serve as a delicious grilled vegetable salad.'
+       );
+
+
+INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+VALUES (7, 'Thai Green Curry', 'A fragrant and spicy Thai green curry with chicken, vegetables, and aromatic herbs.',
+        './assets/images/thai_green_curry.png', 0, 4.6, 50, 'Moderate', 'Main dish',
+        '2 boneless, skinless chicken breasts, cut into bite-sized pieces
+        2 tbsp green curry paste
+        400ml coconut milk
+        1 red bell pepper, sliced
+        1 green bell pepper, sliced
+        1 zucchini, sliced
+        1 cup bamboo shoots
+        1 cup Thai basil leaves
+        2 tbsp fish sauce
+        1 tbsp brown sugar
+        1 lime, juiced
+        Cooked jasmine rice, for serving',
+        '1. In a large skillet, heat some coconut milk and green curry paste over medium heat until fragrant.
+        2. Add chicken pieces and cook until browned.
+        3. Stir in the remaining coconut milk, fish sauce, and brown sugar. Simmer for 10 minutes.
+        4. Add sliced bell peppers, zucchini, and bamboo shoots. Cook until vegetables are tender.
+        5. Stir in Thai basil leaves and lime juice.
+        6. Serve hot over cooked jasmine rice.'
+       );
+
+INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+VALUES (8, 'Beef Wellington', 'A classic British dish featuring tender beef fillet wrapped in puff pastry, served with a rich mushroom duxelles.',
+        './assets/images/beef_wellington.png', 0, 4.9, 120, 'Challenging', 'Main dish',
+        '500g beef fillet
+        2 tbsp olive oil
+        200g mushrooms, finely chopped
+        2 cloves garlic, minced
+        1 shallot, finely chopped
+        2 sprigs fresh thyme, leaves stripped
+        500g puff pastry
+        2 slices prosciutto
+        2 egg yolks, beaten
+        Salt and pepper to taste
+        Red wine sauce (optional)',
+        '1. Season beef fillet with salt and pepper. In a hot pan, sear the beef on all sides with olive oil.
+        2. Remove from heat and let it cool.
+        3. In the same pan, sauté garlic, shallot, and mushrooms until moisture has evaporated. Add thyme leaves.
+        4. Roll out puff pastry and layer prosciutto slices. Spread mushroom duxelles on top.
+        5. Place seared beef in the center and wrap puff pastry, sealing the edges.
+        6. Brush with beaten egg yolks and bake at 200°C (400°F) for 30-35 minutes for medium-rare.
+        7. Serve with red wine sauce, if desired.'
+       );
+
+
+INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+VALUES (9, 'Chocolate Fondue', 'A fun and indulgent dessert for sharing, featuring a rich and creamy chocolate fondue.',
+        './assets/images/chocolate_fondue.png', 0, 4.7, 20, 'Easy', 'Dessert',
+        '200g dark chocolate, chopped
+        150ml heavy cream
+        1 tsp vanilla extract
+        Assorted dippers (strawberries, bananas, marshmallows, pretzels)
+        Skewers or fondue forks',
+        '1. In a saucepan, heat heavy cream until it just begins to simmer. Remove from heat.
+        2. Add chopped dark chocolate and let it sit for a minute to melt.
+        3. Stir until smooth and creamy. Stir in vanilla extract.
+        4. Transfer chocolate mixture to a fondue pot or a heatproof bowl.
+        5. Arrange assorted dippers on a platter.
+        6. Use skewers or fondue forks to dip and enjoy the chocolate fondue!'
+       );
+
+
+INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+VALUES (10, 'Vegetable Lasagna', 'A hearty vegetarian lasagna with layers of pasta, ricotta cheese, vegetables, and marinara sauce.',
+        './assets/images/vegetable_lasagna.png', 0, 4.5, 75, 'Moderate', 'Main dish',
+        '9 lasagna noodles
+        2 cups ricotta cheese
+        2 cups shredded mozzarella cheese
+        1 cup grated Parmesan cheese
+        2 cups marinara sauce
+        2 cups sliced zucchini
+        2 cups sliced mushrooms
+        2 cups spinach leaves
+        2 cloves garlic, minced
+        2 tsp Italian seasoning
+        Salt and pepper to taste
+        Fresh basil leaves, for garnish',
+        '1. Cook lasagna noodles according to package instructions. Drain and set aside.
+        2. In a skillet, sauté garlic, zucchini, mushrooms, and spinach until tender. Season with Italian seasoning, salt, and pepper.
+        3. In a mixing bowl, combine ricotta, mozzarella, and Parmesan cheeses.
+        4. Preheat oven to 180°C (350°F).
+        5. In a baking dish, layer marinara sauce, lasagna noodles, ricotta mixture, and sautéed vegetables.
+        6. Repeat layers and finish with a layer of marinara sauce and mozzarella cheese.
+        7. Bake for 30-35 minutes until bubbly and golden.
+        8. Garnish with fresh basil leaves before serving.'
+       );
+
+
+INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
+VALUES (11, 'Sushi Rolls', 'Learn how to make delicious homemade sushi rolls with fresh fish, avocado, and rice.',
+        './assets/images/sushi_rolls.png', 0, 4.8, 60, 'Moderate', 'Appetizer',
+        '2 cups sushi rice
+        4 sheets nori seaweed
+        200g fresh salmon, thinly sliced
+        1 avocado, thinly sliced
+        Cucumber sticks
+        Soy sauce, for dipping
+        Pickled ginger and wasabi, for serving',
+        '1. Rinse sushi rice under cold water until water runs clear. Cook rice according to package instructions.
+        2. Lay a bamboo sushi rolling mat on a clean surface. Place a sheet of plastic wrap on the mat.
+        3. Place a sheet of nori, shiny side down, on the plastic wrap.
+        4. Wet your hands and grab a handful of rice. Spread rice evenly over the nori, leaving about 1-inch of nori uncovered.
+        5. Lay slices of avocado, salmon, and cucumber on the rice.
+        6. Roll the sushi tightly using the bamboo mat, pressing gently.
+        7. Use a sharp knife to slice the sushi roll into bite-sized pieces.
+        8. Serve with soy sauce, pickled ginger, and wasabi.'
+       );
