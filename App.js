@@ -22,7 +22,7 @@ const App = () => {
           {(props) => <HomeScreen {...props} recipeList={recipeList} favoriteList={favoriteList} setFavoriteList={setFavoriteList} />}
         </Stack.Screen>
         <Stack.Screen name="Favorites" options={{ title: 'Favorites' }}>
-          {(props) => <FavoScreen {...props} favoriteList={favoriteList} />}
+          {(props) => <FavoScreen {...props} favoriteList={favoriteList} setFavoriteList={setFavoriteList} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

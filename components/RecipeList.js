@@ -10,7 +10,7 @@ import {Ionicons} from '@expo/vector-icons';
 import { Swipeable } from 'react-native-gesture-handler';
 
 const RecipeList = props => {
-  const {recipeList} = props;
+  const {recipeList, favoriteList, setFavoriteList} = props;
 
   const handleFavorite = index => {
     const recipe = recipeList[index];
@@ -21,6 +21,12 @@ const RecipeList = props => {
     const newRecipeList = [...props.recipeList];
     newRecipeList.splice(index, 1);
     props.setRecipeList(newRecipeList);
+
+    if (props.favoriteList.includes(props.recipeList[index])) {
+      const newFavoriteList = [...props.favoriteList];
+      newFavoriteList.splice(index, 1);
+      props.setFavoriteList(newFavoriteList);
+    }
   };
 
   return (

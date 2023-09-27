@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text, View, ScrollView, StyleSheet, Image} from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
+import {View, StyleSheet, Image} from 'react-native';
+import FavoRecipeList from './FavoRecipeList';
 
 const FavoScreen = props => {
-  const {favoriteList} = props;
+  const {favoriteList, setFavoriteList} = props;
 
   return (
     <View style={styles.container}>
@@ -11,25 +11,7 @@ const FavoScreen = props => {
         <Image style={styles.yourfavoriteIcon} source={require('../assets/icons/YourFavoritesIcon.png')} />
         <Image style={styles.logo} source={require('../assets/icons/FlavorFolioSmallIcon.png')} />
       </View>
-
-
-      <ScrollView style={styles.scrollviewstyle}>
-        {favoriteList.map((recipe, index) => (
-          <View style={styles.listItemStyle} key={index}>
-            <View style={styles.recipeHeader}>
-              <Text style={styles.recipeName}>{recipe.name}</Text>
-            </View>
-            <Text style={styles.recipeDescription}>{recipe.description}</Text>
-            <View style={styles.ratingContainer}>
-              <Ionicons name="star" size={24} color="#FFD700" />
-              <Ionicons name="star" size={24} color="#FFD700" />
-              <Ionicons name="star" size={24} color="#FFD700" />
-              <Ionicons name="star" size={24} color="#FFD700" />
-              <Ionicons name="star-outline" size={24} color="#FFD700" />
-            </View>
-          </View>
-        ))}
-      </ScrollView>
+     <FavoRecipeList favoriteList={favoriteList} setFavoriteList={setFavoriteList} />
     </View>
   );
 };
