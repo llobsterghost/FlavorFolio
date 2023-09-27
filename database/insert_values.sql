@@ -1,5 +1,5 @@
 INSERT INTO recipe(ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (1, 'Penne al´ arrabiata', 'A spicy pasta al''arrabiata - or spicy tomato sauce to you and me - an easy storecupboard pasta dish for a weeknight supper.',
+VALUES ('1', 'Penne al´ arrabiata', 'A spicy pasta al''arrabiata - or spicy tomato sauce to you and me - an easy storecupboard pasta dish for a weeknight supper.',
         './assets/images/penne_arrabiata.png', 0, 5, 30, 'Easy', 'Main dish',
         '6 tbsp extra virgin olive oil
         2 red chillies, finely sliced
@@ -17,7 +17,7 @@ VALUES (1, 'Penne al´ arrabiata', 'A spicy pasta al''arrabiata - or spicy tomat
 );
 
 INSERT INTO recipe(ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES(2, 'Chocolate Pancakes', 'These fluffy chocolate pancakes are the perfect way for a chocolate lover to start their day! Thick and full of melty chocolate in each bite, this simple recipe gives you a good reason to get out of bed in the morning.',
+VALUES('2', 'Chocolate Pancakes', 'These fluffy chocolate pancakes are the perfect way for a chocolate lover to start their day! Thick and full of melty chocolate in each bite, this simple recipe gives you a good reason to get out of bed in the morning.',
         './assets/images/chocolate_pancakes.png', 0, 5, 40, 'Easy', 'Breakfast',
         ' 1 1/3 cups (185g) all-purpose flour
         1/4 cup (25g) cocoa powder (I use Dutch-processed)
@@ -38,7 +38,7 @@ VALUES(2, 'Chocolate Pancakes', 'These fluffy chocolate pancakes are the perfect
 
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (3, 'Spicy Beef Tacos', 'Tasty and spicy beef tacos with fresh salsa and guacamole. Perfect for a casual dinner with friends.',
+VALUES ('3', 'Spicy Beef Tacos', 'Tasty and spicy beef tacos with fresh salsa and guacamole. Perfect for a casual dinner with friends.',
         './assets/images/spicy_beef_tacos.png', 0, 4.7, 45, 'Moderate', 'Main dish',
         '500g ground beef
         1 onion, finely chopped
@@ -60,7 +60,7 @@ VALUES (3, 'Spicy Beef Tacos', 'Tasty and spicy beef tacos with fresh salsa and 
 
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (4, 'Caprese Salad', 'A classic Italian salad with tomatoes, fresh mozzarella, basil, and balsamic glaze. Light and delicious.',
+VALUES ('4', 'Caprese Salad', 'A classic Italian salad with tomatoes, fresh mozzarella, basil, and balsamic glaze. Light and delicious.',
         './assets/images/caprese_salad.png', 0, 4.9, 15, 'Easy', 'Salad',
         '4 ripe tomatoes, sliced
         200g fresh mozzarella cheese, sliced
@@ -77,7 +77,7 @@ VALUES (4, 'Caprese Salad', 'A classic Italian salad with tomatoes, fresh mozzar
 
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (5, 'Chicken Alfredo Pasta', 'Creamy and indulgent chicken Alfredo pasta with a rich parmesan sauce.',
+VALUES ('5', 'Chicken Alfredo Pasta', 'Creamy and indulgent chicken Alfredo pasta with a rich parmesan sauce.',
         './assets/images/chicken_alfredo_pasta.png', 0, 4.5, 40, 'Moderate', 'Main dish',
         '300g fettuccine pasta
         2 boneless, skinless chicken breasts
@@ -96,7 +96,7 @@ VALUES (5, 'Chicken Alfredo Pasta', 'Creamy and indulgent chicken Alfredo pasta 
 
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (6, 'Grilled Vegetable Salad', 'A healthy and colorful salad with grilled vegetables and a zesty lemon vinaigrette.',
+VALUES ('6', 'Grilled Vegetable Salad', 'A healthy and colorful salad with grilled vegetables and a zesty lemon vinaigrette.',
         './assets/images/grilled_vegetable_salad.png', 0, 4.8, 25, 'Easy', 'Salad',
         'Assorted vegetables (bell peppers, zucchini, eggplant, cherry tomatoes)
         Olive oil
@@ -117,7 +117,7 @@ VALUES (6, 'Grilled Vegetable Salad', 'A healthy and colorful salad with grilled
 
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (7, 'Thai Green Curry', 'A fragrant and spicy Thai green curry with chicken, vegetables, and aromatic herbs.',
+VALUES ('7', 'Thai Green Curry', 'A fragrant and spicy Thai green curry with chicken, vegetables, and aromatic herbs.',
         './assets/images/thai_green_curry.png', 0, 4.6, 50, 'Moderate', 'Main dish',
         '2 boneless, skinless chicken breasts, cut into bite-sized pieces
         2 tbsp green curry paste
@@ -140,7 +140,7 @@ VALUES (7, 'Thai Green Curry', 'A fragrant and spicy Thai green curry with chick
        );
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (8, 'Beef Wellington', 'A classic British dish featuring tender beef fillet wrapped in puff pastry, served with a rich mushroom duxelles.',
+VALUES ('8', 'Beef Wellington', 'A classic British dish featuring tender beef fillet wrapped in puff pastry, served with a rich mushroom duxelles.',
         './assets/images/beef_wellington.png', 0, 4.9, 120, 'Challenging', 'Main dish',
         '500g beef fillet
         2 tbsp olive oil
@@ -164,7 +164,7 @@ VALUES (8, 'Beef Wellington', 'A classic British dish featuring tender beef fill
 
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (9, 'Chocolate Fondue', 'A fun and indulgent dessert for sharing, featuring a rich and creamy chocolate fondue.',
+VALUES ('9', 'Chocolate Fondue', 'A fun and indulgent dessert for sharing, featuring a rich and creamy chocolate fondue.',
         './assets/images/chocolate_fondue.png', 0, 4.7, 20, 'Easy', 'Dessert',
         '200g dark chocolate, chopped
         150ml heavy cream
@@ -181,7 +181,7 @@ VALUES (9, 'Chocolate Fondue', 'A fun and indulgent dessert for sharing, featuri
 
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (10, 'Vegetable Lasagna', 'A hearty vegetarian lasagna with layers of pasta, ricotta cheese, vegetables, and marinara sauce.',
+VALUES ('10', 'Vegetable Lasagna', 'A hearty vegetarian lasagna with layers of pasta, ricotta cheese, vegetables, and marinara sauce.',
         './assets/images/vegetable_lasagna.png', 0, 4.5, 75, 'Moderate', 'Main dish',
         '9 lasagna noodles
         2 cups ricotta cheese
@@ -207,7 +207,7 @@ VALUES (10, 'Vegetable Lasagna', 'A hearty vegetarian lasagna with layers of pas
 
 
 INSERT INTO recipe (ID, TITLE, DESCRIPTION, IMAGE, COOKED_COUNTER, STARS, PREPTIME, DIFFICULTY_LEVEL, TYPE, INGREDIENTS, PREPARATION)
-VALUES (11, 'Sushi Rolls', 'Learn how to make delicious homemade sushi rolls with fresh fish, avocado, and rice.',
+VALUES ('11', 'Sushi Rolls', 'Learn how to make delicious homemade sushi rolls with fresh fish, avocado, and rice.',
         './assets/images/sushi_rolls.png', 0, 4.8, 60, 'Moderate', 'Appetizer',
         '2 cups sushi rice
         4 sheets nori seaweed

@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS favourites;
+DROP TABLE IF EXISTS favourite;
 DROP TABLE IF EXISTS recipe;
 
 CREATE TABLE recipe (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            id VARCHAR(255) PRIMARY KEY NOT NULL,
             title VARCHAR(255) NOT NULL,
             description TEXT NOT NULL,
             image VARCHAR(255),
@@ -16,8 +16,7 @@ CREATE TABLE recipe (
 );
 
 
-CREATE TABLE favourites (
-        recipe_id INT PRIMARY KEY,
+CREATE TABLE favourite (
+        recipe_id VARCHAR(255) PRIMARY KEY NOT NULL,
         FOREIGN KEY (recipe_id) REFERENCES recipe(id)
 );
-
