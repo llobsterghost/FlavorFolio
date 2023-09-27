@@ -7,19 +7,43 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
+import { Swipeable } from 'react-native-gesture-handler';
 
 const RecipeList = props => {
-  const {recipeList} = props;
+  const {recipeList, favoriteList, setFavoriteList} = props;
 
   const handleFavorite = index => {
     const recipe = recipeList[index];
     props.setFavoriteList([...props.favoriteList, recipe]);
   };
 
+  const handleDeleteRecipe = index => {
+    const newRecipeList = [...props.recipeList];
+    newRecipeList.splice(index, 1);
+    props.setRecipeList(newRecipeList);
+
+    if (props.favoriteList.includes(props.recipeList[index])) {
+      const newFavoriteList = [...props.favoriteList];
+      newFavoriteList.splice(index, 1);
+      props.setFavoriteList(newFavoriteList);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollviewstyle}>
         {recipeList.map((recipe, index) => (
+          <Swipeable
+          renderRightActions={() => (
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={() => handleDeleteRecipe(index)}
+            >
+              <Text style={styles.deleteButtonText}>Are you sure you want to delete this recipe?</Text>
+              <Ionicons name="trash-outline" size={24} color="white" />
+            </TouchableOpacity>
+          )}
+        >
           <TouchableOpacity
             onPress={() => props.navigation.navigate('Recipe', {recipe})}>
             <View style={styles.listItemStyle} key={index}>
@@ -39,6 +63,7 @@ const RecipeList = props => {
               </View>
             </View>
           </TouchableOpacity>
+          </Swipeable>
         ))}
       </ScrollView>
     </View>
@@ -78,6 +103,19 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  deleteButton: {
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 100,
+    height: '100%',
+  },
+  deleteButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
 });
 
