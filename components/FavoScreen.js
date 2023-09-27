@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View, ScrollView, StyleSheet, Image} from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
 
 const FavoScreen = props => {
   const {favoriteList} = props;
