@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from './components/HomeScreen';
 import FavoScreen from './components/FavoScreen';
+import AddRecipeScreen from "./components/AddRecipeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,9 @@ const App = () => {
         </Stack.Screen>
         <Stack.Screen name="Favorites" options={{ title: 'Favorites' }}>
           {(props) => <FavoScreen {...props} favoriteList={favoriteList} setFavoriteList={setFavoriteList} />}
+        </Stack.Screen>
+        <Stack.Screen name="AddRecipe" options={{ title: 'Add Recipe' }}>
+          {(props) => <AddRecipeScreen {...props}/>}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
