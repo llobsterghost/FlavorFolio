@@ -3,12 +3,13 @@ import {
   StyleSheet,
   TextInput,
   View,
-  Image, TouchableOpacity,
+  Image,
+  TouchableOpacity,
 } from 'react-native';
 import RecipeList from './RecipeList';
 
 const HomeScreen = props => {
-  const {recipeList, favoriteList, setFavoriteList} = props;
+  const {recipeList, setRecipeList, favoriteList, setFavoriteList} = props;
   const [text, setText] = React.useState('');
   const textInputHandler = enteredText => {
     setText(enteredText);
@@ -48,14 +49,16 @@ const HomeScreen = props => {
           style={styles.input}
           onChangeText={textInputHandler}
           value={text}
-          placeholder='Search for recipes...'
+          placeholder="Search for recipes..."
         />
       </View>
 
-
-      <RecipeList recipeList={recipeList}
-                  favoriteList={favoriteList}
-                  setFavoriteList={setFavoriteList}
+      <RecipeList
+        navigation={props.navigation}
+        recipeList={recipeList}
+        setRecipeList={setRecipeList}
+        favoriteList={favoriteList}
+        setFavoriteList={setFavoriteList}
       />
     </View>
   );

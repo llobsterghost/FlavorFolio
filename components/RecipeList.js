@@ -5,12 +5,12 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
 import { Swipeable } from 'react-native-gesture-handler';
 
 const RecipeList = props => {
-  const {recipeList, favoriteList, setFavoriteList} = props;
+  const {recipeList, setRecipeList, favoriteList, setFavoriteList, navigation} = props; 
 
   const handleFavorite = index => {
     const recipe = recipeList[index];
@@ -34,32 +34,31 @@ const RecipeList = props => {
       <ScrollView style={styles.scrollviewstyle}>
         {recipeList.map((recipe, index) => (
           <Swipeable
+          key={index}
           renderRightActions={() => (
             <TouchableOpacity
               style={styles.deleteButton}
               onPress={() => handleDeleteRecipe(index)}
             >
               <Text style={styles.deleteButtonText}>Are you sure you want to delete this recipe?</Text>
-              <Ionicons name="trash-outline" size={24} color="white" />
             </TouchableOpacity>
           )}
         >
           <TouchableOpacity
-            onPress={() => props.navigation.navigate('Recipe', {recipe})}>
+            onPress={() =>
+              props.navigation.navigate('Recipe', {recipe: recipe})
+            }>
             <View style={styles.listItemStyle} key={index}>
+            <Image style={styles.image} source={require(recipe.imagePath)} />
               <View style={styles.recipeHeader}>
-                <Text style={styles.recipeName}>{recipe.name}</Text>
+                <Text style={styles.recipeName}>{recipe.title}</Text>
                 <TouchableOpacity onPress={() => handleFavorite(index)}>
-                  <Ionicons name="heart-outline" size={24} color="black" />
+                <Text style={styles.recipeName}>Add to Favorites</Text>
                 </TouchableOpacity>
               </View>
               <Text style={styles.recipeDescription}>{recipe.description}</Text>
               <View style={styles.ratingContainer}>
-                <Ionicons name="star" size={24} color="#FFD700" />
-                <Ionicons name="star" size={24} color="#FFD700" />
-                <Ionicons name="star" size={24} color="#FFD700" />
-                <Ionicons name="star" size={24} color="#FFD700" />
-                <Ionicons name="star-outline" size={24} color="#FFD700" />
+              
               </View>
             </View>
           </TouchableOpacity>
@@ -116,6 +115,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 10,
+  },
+  image: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
   },
 });
 

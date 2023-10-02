@@ -5,8 +5,8 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Image
 } from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
 
 const FavoRecipeList = props => {
   const {favoriteList, setFavoriteList} = props;
@@ -21,19 +21,16 @@ const FavoRecipeList = props => {
     <ScrollView style={styles.scrollviewstyle}>
       {favoriteList.map((recipe, index) => (
         <View style={styles.listItemStyle} key={index}>
+          <Image style={styles.image} source={{uri: recipe.imagePath}}/>
           <View style={styles.recipeHeader}>
-            <Text style={styles.recipeName}>{recipe.name}</Text>
+            <Text style={styles.recipeName}>{recipe.title}</Text>
             <TouchableOpacity onPress={() => handleUnFavorite(index)}>
-              <Ionicons name="heart" size={24} color="black" />
+              <Text>unFavorite</Text>
             </TouchableOpacity>
           </View>
           <Text style={styles.recipeDescription}>{recipe.description}</Text>
           <View style={styles.ratingContainer}>
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star-outline" size={24} color="#FFD700" />
+            
           </View>
         </View>
       ))}

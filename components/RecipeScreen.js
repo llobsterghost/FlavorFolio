@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Image, Text, Button} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const RecipeScreen = props => {
   const {recipe} = props.route.params;
@@ -11,85 +12,75 @@ const RecipeScreen = props => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Image
-          style={styles.logo}
-          source={require('../assets/icons/FlavorFolioSmallIcon.png')}
-        />
-      </View>
-      <View style={styles.recipeContainer}>
-        <Text style={styles.recipeName}>{recipe.name}</Text>
-        <Image style={styles.logo} source={{uri: recipe.image}} />
-
-        <View style={styles.ratingContainer}>
-          <Text style={styles.recipeDescription}>
-            {recipe.recipeDescription}
-          </Text>
-          <View style={styles.ratingContainer}>
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star-outline" size={24} color="#FFD700" />
-          </View>
-        </View>
-
-        <View style={styles.cookedContainer}>
-          <Text style={styles.cookedText}>
-            How many times have you cooked this meal?
-          </Text>
-          <Text style={styles.cookedCount}>{count}</Text>
-          <Button title="Cooked" onPress={handleCookedPress} />
-        </View>
-
-        <View style={styles.infoContainer}>
-          <View style={styles.timeContainer}>
-            <Image
-              style={styles.timeIcon}
-              source={require('../assets/icons/time.png')}
-            />
-            <Text style={styles.timeText}>Prep: {recipe.prepTime}</Text>
-            <Text style={styles.timeText}>Cook: {recipe.cookTime}</Text>
-          </View>
-
-          <View style={styles.levelContainer}>
-            <Image
-              style={styles.levelIcon}
-              source={require('../assets/icons/level.png')}
-            />
-            <Text style={styles.levelText}>{recipe.recipeLevel}</Text>
-          </View>
-
-          <View style={styles.typeContainer}>
-            <Image
-              style={styles.typeIcon}
-              source={require('../assets/icons/type.png')}
-            />
-            <Text style={styles.typeText}>{recipe.recipeType}</Text>
-          </View>
-        </View>
-
-        <View style={styles.ingridientsContainer}>
-          <Text style={styles.ingridientsText}>Ingredients</Text>
-          <Text style={styles.recipeIngredients}>
-            {recipe.recipeIngredients}
-          </Text>
-        </View>
-
-        <View style={styles.instructionsContainer}>
-          <Text style={styles.instructionsText}>How to cook</Text>
-          <Text style={styles.recipeInstructions}>
-            {recipe.recipeInstructions}
-          </Text>
-        </View>
-
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Edit"
-            onPress={() => props.navigation.navigate('Edit')}
+      <ScrollView style={styles.scrollviewstyle}>
+        <View style={styles.header}>
+          <Image
+            style={styles.logo}
+            source={require('../assets/icons/FlavorFolioSmallIcon.png')}
           />
         </View>
-      </View>
+        <View style={styles.recipeContainer}>
+          <Text style={styles.recipeName}>{recipe.title}</Text>
+          <Image style={styles.logo} source={{uri: recipe.imagePath}} />
+
+          <View style={styles.ratingContainer}>
+            <Text style={styles.recipeDescription}>{recipe.description}</Text>
+            <View style={styles.ratingContainer}></View>
+          </View>
+
+          <View style={styles.cookedContainer}>
+            <Text style={styles.cookedText}>
+              How many times have you cooked this meal?
+            </Text>
+            <Text style={styles.cookedCount}>{count}</Text>
+            <Button title="Cooked" onPress={handleCookedPress} />
+          </View>
+
+          <View style={styles.infoContainer}>
+            <View style={styles.timeContainer}>
+              {/*<Image
+              style={styles.timeIcon}
+              source={require('../assets/icons/time.png')}
+  />*/}
+              <Text style={styles.timeText}>Prep: {recipe.prepTime}</Text>
+              <Text style={styles.timeText}>Cook: {recipe.cookTime}</Text>
+            </View>
+
+            <View style={styles.levelContainer}>
+              {/*<Image
+              style={styles.levelIcon}
+              source={require('../assets/icons/level.png')}
+/>*/}
+              <Text style={styles.levelText}>{recipe.recipeLevel}</Text>
+            </View>
+
+            <View style={styles.typeContainer}>
+              {/*<Image
+              style={styles.typeIcon}
+              source={require('../assets/icons/type.png')}
+/>*/}
+              <Text style={styles.typeText}>{recipe.recipeType}</Text>
+            </View>
+          </View>
+
+          <View style={styles.ingridientsContainer}>
+            <Text style={styles.ingridientsText}>Ingredients</Text>
+            <Text style={styles.recipeIngredients}>{recipe.ingredients}</Text>
+          </View>
+
+          <View style={styles.instructionsContainer}>
+            <Text style={styles.instructionsText}>How to cook</Text>
+            <Text style={styles.recipeInstructions}>{recipe.preparation}</Text>
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <Button
+              title="Edit"
+              onPress={() => props.navigation.navigate('Edit')}
+            />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
