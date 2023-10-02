@@ -17,7 +17,7 @@ import {
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import StarRating from 'react-native-star-rating-widget';
 
-const AddRecipeScreen = props => {
+const AddRecipeScreen = () => {
 
     const [recipeName, setRecipeName] = useState('');
     const [recipeDescription, setRecipeDescription] = useState('');
@@ -262,9 +262,6 @@ const AddRecipeScreen = props => {
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.saveCancelButton} onPress={handleSave}>
                     <Text style={styles.buttonText}>Save</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.saveCancelButton} onPress={props.navigation.navigate("Home")}>
-                    <Text style={styles.buttonText}>Cancel</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
