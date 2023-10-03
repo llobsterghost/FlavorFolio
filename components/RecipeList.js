@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,7 +10,7 @@ import {
 import { Swipeable } from 'react-native-gesture-handler';
 
 const RecipeList = props => {
-  const {recipeList, setRecipeList, favoriteList, setFavoriteList, navigation, filteredRecipeList} = props; 
+  const {recipeList, setRecipeList, favoriteList, setFavoriteList, navigation, filteredRecipeList} = props;
 
   const handleFavorite = index => {
     const recipe = recipeList[index];
@@ -49,7 +49,10 @@ const RecipeList = props => {
               props.navigation.navigate('Recipe', {recipe: recipe})
             }>
             <View style={styles.listItemStyle} key={index}>
-            {/*<Image style={styles.image} source={require(recipe.imagePath)} />*/}
+              <Image
+                  style={styles.image}
+                  source={{ uri: `data:image/png;base64,${recipe.image}` }} // Assuming 'recipe.image' is the base64-encoded image string
+              />
               <View style={styles.recipeHeader}>
                 <Text style={styles.recipeName}>{recipe.title}</Text>
                 <TouchableOpacity onPress={() => handleFavorite(index)}>
@@ -58,7 +61,7 @@ const RecipeList = props => {
               </View>
               <Text style={styles.recipeDescription}>{recipe.description}</Text>
               <View style={styles.ratingContainer}>
-              
+
               </View>
             </View>
           </TouchableOpacity>

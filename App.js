@@ -21,7 +21,7 @@ const App = () => {
   const fetchRecipes = async () => {
     try {
       const response = await fetch(
-        'https://20230929t142747-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/readallrecipes',
+        'https://20231003t152124-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/readallrecipes',
       );
       const data = await response.json();
       setRecipeList(data);
