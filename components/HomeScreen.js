@@ -15,6 +15,13 @@ const HomeScreen = props => {
     setText(enteredText);
   };
 
+  const searchFilterFunction = recipe => {
+    const searchText = text.toLowerCase();
+    return recipe.title.toLowerCase().includes(searchText);
+  };
+
+  const filteredRecipeList = recipeList.filter(searchFilterFunction);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -59,6 +66,7 @@ const HomeScreen = props => {
         setRecipeList={setRecipeList}
         favoriteList={favoriteList}
         setFavoriteList={setFavoriteList}
+        filteredRecipeList={filteredRecipeList}
       />
     </View>
   );
