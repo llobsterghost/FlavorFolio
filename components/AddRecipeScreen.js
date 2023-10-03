@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Picker} from '@react-native-picker/picker';
+import Dropdown from './DropDown';
 
 import {
   Text,
@@ -20,24 +21,20 @@ import StarRating from 'react-native-star-rating-widget';
 const AddRecipeScreen = props => {
   const recipe = props.route?.params?.recipe;
 
-  const [recipeName, setRecipeName] = useState(recipe ? recipe.name : '');
+  const [recipeName, setRecipeName] = useState(recipe ? recipe.title : '');
   const [recipeDescription, setRecipeDescription] = useState(
-    recipe ? recipe.description : '',
-  );
+    recipe ? recipe.description : '');
   const [ingredients, setIngredients] = useState(
-    recipe ? recipe.ingredients.join('\n') : '',
-  );
+    recipe ? recipe.ingredients : '');
   const [howToCook, setHowToCook] = useState(
-    recipe ? recipe.howToCook.join('\n') : '',
-  );
-  const [selectedImage, setSelectedImage] = useState(
-    recipe ? recipe.image : null,
-  );
+    recipe ? recipe.preparation : '');
+  const [selectedImage, setSelectedImage] = useState(recipe ? recipe.image : null);
 
-  const [level, setLevel] = useState(recipe ? recipe.level : 'easy');
+  const [level, setLevel] = useState(recipe ? recipe.difficultyLevel : 'Easy');
   const [type, setType] = useState(recipe ? recipe.type : 'Pre-meal');
-  const [cookTime, setCookTime] = useState(recipe ? recipe.cookTime : '');
-  const [rating, setRating] = useState(recipe ? recipe.rating : 0);
+  const [preptime, setPreptime] = useState(recipe ? recipe.preptime : "");
+  const [cooktime, setCooktime] = useState(recipe ? recipe.cooktime : "");
+  const [rating, setRating] = useState(recipe ? recipe.stars : 0);
 
   const timeIcon = require('../assets/icons/time.png');
   const levelIcon = require('../assets/icons/level.png');
@@ -49,10 +46,6 @@ const AddRecipeScreen = props => {
 
   const handleTypeChange = value => {
     setType(value);
-  };
-
-  const handleRatingChange = rating => {
-    setRating(rating);
   };
 
   const requestPermissions = async () => {
@@ -155,7 +148,8 @@ const AddRecipeScreen = props => {
       description: recipeDescription,
       image_path: selectedImage,
       stars: rating,
-      preptime: cookTime,
+      preptime: preptime,
+      cookTime: cooktime,
       difficulty_level: level,
       ingredients: ingredients,
       preparation: howToCook,
@@ -225,10 +219,18 @@ const AddRecipeScreen = props => {
         <Image source={timeIcon} style={styles.icon} />
         <TextInput
           style={styles.input}
+          placeholder="Prep Time (minutes)"
+          keyboardType="numeric"
+          value={preptime}
+          onChangeText={text => setPreptime(text)}
+        />
+        
+        <TextInput
+          style={styles.input}
           placeholder="Cook Time (minutes)"
           keyboardType="numeric"
-          value={cookTime}
-          onChangeText={text => setCookTime(text)}
+          value={cooktime}
+          onChangeText={text => setCooktime(text)}
         />
       </View>
       <View style={styles.ratingContainer}>
@@ -237,25 +239,35 @@ const AddRecipeScreen = props => {
       </View>
       <View style={styles.inputGroup}>
         <Image source={levelIcon} style={styles.icon} />
-        <Picker
+        <Dropdown
+          options={['Easy', 'Medium', 'Hard']}
+          selectedValue={level}
+          onValueChange={handleLevelChange}
+        />
+        {/*<Picker
           selectedValue={level}
           style={styles.levelPicker}
           onValueChange={handleLevelChange}>
           <Picker.Item label="Easy" value="easy" />
           <Picker.Item label="Medium" value="medium" />
           <Picker.Item label="Hard" value="hard" />
-        </Picker>
+        </Picker>*/}
       </View>
       <View style={styles.inputGroup}>
         <Image source={typeIcon} style={styles.icon} />
-        <Picker
+        <Dropdown
+          options={['Pre-meal', 'breakfast', 'salad', 'Main dish', 'Dessert']}
+          selectedValue={type}
+          onValueChange={handleTypeChange}
+        />
+        {/*<Picker
           selectedValue={type}
           style={styles.typePicker}
           onValueChange={handleTypeChange}>
           <Picker.Item label="Pre-meal" value="pre-meal" />
-          <Picker.Item label="Main spit" value="main spit" />
+          <Picker.Item label="Main dish" value="main dish" />
           <Picker.Item label="Dessert" value="dessert" />
-        </Picker>
+      </Picker>*/}
       </View>
       <TextInput
         style={styles.input}

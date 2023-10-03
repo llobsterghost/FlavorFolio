@@ -7,10 +7,18 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { Swipeable } from 'react-native-gesture-handler';
+import {Swipeable} from 'react-native-gesture-handler';
+import StarRating from 'react-native-star-rating-widget';
 
 const RecipeList = props => {
-  const {recipeList, setRecipeList, favoriteList, setFavoriteList, navigation, filteredRecipeList} = props; 
+  const {
+    recipeList,
+    setRecipeList,
+    favoriteList,
+    setFavoriteList,
+    navigation,
+    filteredRecipeList,
+  } = props;
 
   const handleFavorite = index => {
     const recipe = recipeList[index];
@@ -34,34 +42,36 @@ const RecipeList = props => {
       <ScrollView style={styles.scrollviewstyle}>
         {filteredRecipeList.map((recipe, index) => (
           <Swipeable
-          key={index}
-          renderRightActions={() => (
+            key={index}
+            renderRightActions={() => (
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={() => handleDeleteRecipe(index)}>
+                <Text style={styles.deleteButtonText}>
+                  Are you sure you want to delete this recipe?
+                </Text>
+              </TouchableOpacity>
+            )}>
             <TouchableOpacity
-              style={styles.deleteButton}
-              onPress={() => handleDeleteRecipe(index)}
-            >
-              <Text style={styles.deleteButtonText}>Are you sure you want to delete this recipe?</Text>
+              onPress={() =>
+                props.navigation.navigate('Recipe', {recipe: recipe})
+              }>
+              <View style={styles.listItemStyle} key={index}>
+                {/*<Image style={styles.image} source={require(recipe.imagePath)} />*/}
+                <View style={styles.recipeHeader}>
+                  <Text style={styles.recipeName}>{recipe.title}</Text>
+                  <TouchableOpacity onPress={() => handleFavorite(index)}>
+                    <Text style={styles.recipeName}>Add to Favorites</Text>
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.recipeDescription}>
+                  {recipe.description}
+                </Text>
+                <View style={styles.ratingContainer}>
+                  <StarRating rating={recipe.stars} onChange={() => {}} />
+                </View>
+              </View>
             </TouchableOpacity>
-          )}
-        >
-          <TouchableOpacity
-            onPress={() =>
-              props.navigation.navigate('Recipe', {recipe: recipe})
-            }>
-            <View style={styles.listItemStyle} key={index}>
-            {/*<Image style={styles.image} source={require(recipe.imagePath)} />*/}
-              <View style={styles.recipeHeader}>
-                <Text style={styles.recipeName}>{recipe.title}</Text>
-                <TouchableOpacity onPress={() => handleFavorite(index)}>
-                <Text style={styles.recipeName}>Add to Favorites</Text>
-                </TouchableOpacity>
-              </View>
-              <Text style={styles.recipeDescription}>{recipe.description}</Text>
-              <View style={styles.ratingContainer}>
-              
-              </View>
-            </View>
-          </TouchableOpacity>
           </Swipeable>
         ))}
       </ScrollView>

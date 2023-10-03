@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Image, Text, Button} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import StarRating from 'react-native-star-rating-widget';
 
 const RecipeScreen = props => {
   const {recipe} = props.route.params;
@@ -25,7 +26,9 @@ const RecipeScreen = props => {
 
           <View style={styles.ratingContainer}>
             <Text style={styles.recipeDescription}>{recipe.description}</Text>
-            <View style={styles.ratingContainer}></View>
+            <View style={styles.ratingContainer}>
+              <StarRating rating={recipe.stars} onChange={() => {}}/>
+            </View>
           </View>
 
           <View style={styles.cookedContainer}>
@@ -38,28 +41,28 @@ const RecipeScreen = props => {
 
           <View style={styles.infoContainer}>
             <View style={styles.timeContainer}>
-              {/*<Image
-              style={styles.timeIcon}
-              source={require('../assets/icons/time.png')}
-  />*/}
-              <Text style={styles.timeText}>Prep: {recipe.prepTime}</Text>
-              <Text style={styles.timeText}>Cook: {recipe.cookTime}</Text>
+              <Image
+                style={styles.timeIcon}
+                source={require('../assets/icons/time.png')}
+              />
+              <Text style={styles.timeText}>Prep: {recipe.preptime}</Text>
+              <Text style={styles.timeText}>Cook: {recipe.cooktime}</Text>
             </View>
 
             <View style={styles.levelContainer}>
-              {/*<Image
-              style={styles.levelIcon}
-              source={require('../assets/icons/level.png')}
-/>*/}
-              <Text style={styles.levelText}>{recipe.recipeLevel}</Text>
+              <Image
+                style={styles.levelIcon}
+                source={require('../assets/icons/level.png')}
+              />
+              <Text style={styles.levelText}>{recipe.difficultyLevel}</Text>
             </View>
 
             <View style={styles.typeContainer}>
-              {/*<Image
-              style={styles.typeIcon}
-              source={require('../assets/icons/type.png')}
-/>*/}
-              <Text style={styles.typeText}>{recipe.recipeType}</Text>
+              <Image
+                style={styles.typeIcon}
+                source={require('../assets/icons/type.png')}
+              />
+              <Text style={styles.typeText}>{recipe.type}</Text>
             </View>
           </View>
 
@@ -76,7 +79,9 @@ const RecipeScreen = props => {
           <View style={styles.buttonContainer}>
             <Button
               title="Edit"
-              onPress={() => props.navigation.navigate('Edit')}
+              onPress={() =>
+                props.navigation.navigate('AddRecipe', {recipe: recipe})
+              }
             />
           </View>
         </View>
