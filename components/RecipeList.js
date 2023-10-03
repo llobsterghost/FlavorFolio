@@ -10,7 +10,7 @@ import {
 import { Swipeable } from 'react-native-gesture-handler';
 
 const RecipeList = props => {
-  const {recipeList, setRecipeList, favoriteList, setFavoriteList, navigation} = props; 
+  const {recipeList, setRecipeList, favoriteList, setFavoriteList, navigation, filteredRecipeList} = props; 
 
   const handleFavorite = index => {
     const recipe = recipeList[index];
@@ -32,7 +32,7 @@ const RecipeList = props => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollviewstyle}>
-        {recipeList.map((recipe, index) => (
+        {filteredRecipeList.map((recipe, index) => (
           <Swipeable
           key={index}
           renderRightActions={() => (
