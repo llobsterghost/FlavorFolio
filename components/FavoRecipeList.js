@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Text, View, ScrollView, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 const FavoRecipeList = (props) => {
