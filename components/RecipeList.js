@@ -79,13 +79,17 @@ const styles = StyleSheet.create({
   },
   scrollviewstyle: {
     width: '100%',
+    marginTop: 15,
   },
   listItemStyle: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "#CCC",
+    borderRadius: 10,
     padding: 10,
-    marginBottom: 10,
+    marginBottom: 15,
+    backgroundColor: "#F8F8F8",
+    elevation: 5,
+    overflow: "hidden",
   },
   recipeHeader: {
     flexDirection: 'row',
@@ -94,11 +98,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   recipeName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   recipeDescription: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#666',
     marginBottom: 5,
   },

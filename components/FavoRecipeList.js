@@ -1,22 +1,20 @@
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { Text, View, ScrollView, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-const FavoRecipeList = props => {
-  const { favoriteList, setFavoriteList , navigation} = props;
+const FavoRecipeList = (props) => {
+  const { favoriteList, setFavoriteList, navigation } = props;
 
-
-
-  const handleUnFavorite = index => {
+  const handleUnFavorite = (index) => {
     const newFavoriteList = [...props.favoriteList];
     newFavoriteList.splice(index, 1);
     props.setFavoriteList(newFavoriteList);
+  };
+
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substr(0, maxLength - 3) + "...";
+    }
+    return text;
   };
 
   return (
@@ -24,19 +22,30 @@ const FavoRecipeList = props => {
       {favoriteList.map((recipe, index) => (
         <TouchableOpacity
           key={index}
-          onPress={() => props.navigation.navigate('Recipe', {recipe: recipe})}>
+          onPress={() => props.navigation.navigate('Recipe', { recipe: recipe })}>
           <View style={styles.listItemStyle} key={index}>
-            <Image style={styles.image} source={{uri: recipe.imagePath}} />
-            <View style={styles.recipeHeader}>
-              <Text style={styles.recipeName}>{recipe.title}</Text>
-              <TouchableOpacity onPress={() => handleUnFavorite(index)}>
-                <Image
-                  source={require("../assets/icons/Favourite-checked.png")}
-                  style={styles.imagechecked}
-                />
-              </TouchableOpacity>
+            <View style={styles.imageContainer}>
+              <Image
+                style={styles.image}
+                source={{ uri: `data:image/png;base64,${recipe.image}` }}
+              />
             </View>
-            <Text style={styles.recipeDescription}>{recipe.description}</Text>
+            <View style={styles.textContainer}>
+              <View style={styles.recipeHeader}>
+                <Text style={styles.recipeName}>
+                  {truncateText(recipe.title, 20)}
+                </Text>
+                <TouchableOpacity onPress={() => handleUnFavorite(index)}>
+                  <Image
+                    source={require("../assets/icons/Favourite-checked.png")}
+                    style={styles.imagechecked}
+                  />
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.recipeDescription}>
+                {recipe.description}
+              </Text>
+            </View>
             <View style={styles.ratingContainer}></View>
           </View>
         </TouchableOpacity>
@@ -45,6 +54,7 @@ const FavoRecipeList = props => {
   );
 };
 
+
 const styles = StyleSheet.create({
   scrollviewstyle: {
     width: "100%",
@@ -52,6 +62,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   listItemStyle: {
+    flexDirection: "row",
+    alignItems: "center", // Vertikal zentriert die Elemente
     borderWidth: 2,
     borderColor: "#CCC",
     borderRadius: 10,
@@ -61,27 +73,43 @@ const styles = StyleSheet.create({
     elevation: 5,
     overflow: "hidden",
   },
-  recipeHeader: {
+  imageContainer: {
+    marginRight: 10,
+  },
+  textContainer: {
+    flex: 1, // Damit nimmt der Text-Container den verfügbaren Platz ein
+  },
+  contentContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 5,
   },
   recipeName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
   },
   recipeDescription: {
     fontSize: 12,
     marginBottom: 5,
   },
-  ratingContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+  image: {
+    width: 90,
+    height: 90,
   },
   imagechecked: {
     width: 35,
     height: 35,
+  },
+  recipeHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
