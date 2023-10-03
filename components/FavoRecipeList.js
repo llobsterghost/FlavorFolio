@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
   Text,
   View,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Image
-} from 'react-native';
+  Image,
+} from "react-native";
 
 const FavoRecipeList = props => {
-  const {favoriteList, setFavoriteList} = props;
+  const { favoriteList, setFavoriteList } = props;
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+
 
   const handleUnFavorite = index => {
     const newFavoriteList = [...props.favoriteList];
@@ -21,17 +23,19 @@ const FavoRecipeList = props => {
     <ScrollView style={styles.scrollviewstyle}>
       {favoriteList.map((recipe, index) => (
         <View style={styles.listItemStyle} key={index}>
-          <Image style={styles.image} source={{uri: recipe.imagePath}}/>
+          <Image style={styles.image} source={{ uri: recipe.imagePath }} />
           <View style={styles.recipeHeader}>
             <Text style={styles.recipeName}>{recipe.title}</Text>
+
             <TouchableOpacity onPress={() => handleUnFavorite(index)}>
-              <Text>unFavorite</Text>
+              <Image
+                source={isButtonClicked ? require("../assets/icons/Favourite-check.png") : require("../assets/icons/Favourite-checked.png")}
+                style={styles.imagechecked}
+              />
             </TouchableOpacity>
+
           </View>
           <Text style={styles.recipeDescription}>{recipe.description}</Text>
-          <View style={styles.ratingContainer}>
-            
-          </View>
         </View>
       ))}
     </ScrollView>
@@ -40,32 +44,41 @@ const FavoRecipeList = props => {
 
 const styles = StyleSheet.create({
   scrollviewstyle: {
-    width: '100%',
+    width: "100%",
+    padding: 15,
+    backgroundColor: "#FFF",
   },
   listItemStyle: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "#CCC",
+    borderRadius: 10,
     padding: 10,
-    marginBottom: 10,
+    marginBottom: 15,
+    backgroundColor: "#F8F8F8",
+    elevation: 5,
+    overflow: "hidden",
   },
   recipeHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 5,
   },
   recipeName: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   recipeDescription: {
-    fontSize: 16,
+    fontSize: 12,
     marginBottom: 5,
   },
   ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  imagechecked: {
+    width: 35,
+    height: 35,
   },
 });
 
