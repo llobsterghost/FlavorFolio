@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import React, {useState} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from './components/HomeScreen';
 import FavoScreen from './components/FavoScreen';
+import AddRecipeScreen from "./components/AddRecipeScreen";
 import RecipeScreen from './components/RecipeScreen';
 
 const Stack = createNativeStackNavigator();
@@ -74,6 +74,7 @@ const App = () => {
             component={RenderRecipeScreen}
           />
         </Stack.Navigator>
+          <Stack.Screen name="AddRecipe" component={AddRecipeScreen}/>
       </NavigationContainer>
     </GestureHandlerRootView>
   );
