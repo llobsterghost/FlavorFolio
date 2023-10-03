@@ -5,11 +5,11 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Image
+  Image,
 } from 'react-native';
 
 const FavoRecipeList = props => {
-  const {favoriteList, setFavoriteList} = props;
+  const {favoriteList, setFavoriteList, navigation} = props;
 
   const handleUnFavorite = index => {
     const newFavoriteList = [...props.favoriteList];
@@ -20,19 +20,21 @@ const FavoRecipeList = props => {
   return (
     <ScrollView style={styles.scrollviewstyle}>
       {favoriteList.map((recipe, index) => (
-        <View style={styles.listItemStyle} key={index}>
-          <Image style={styles.image} source={{uri: recipe.imagePath}}/>
-          <View style={styles.recipeHeader}>
-            <Text style={styles.recipeName}>{recipe.title}</Text>
-            <TouchableOpacity onPress={() => handleUnFavorite(index)}>
-              <Text>unFavorite</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+          key={index}
+          onPress={() => props.navigation.navigate('Recipe', {recipe: recipe})}>
+          <View style={styles.listItemStyle} key={index}>
+            <Image style={styles.image} source={{uri: recipe.imagePath}} />
+            <View style={styles.recipeHeader}>
+              <Text style={styles.recipeName}>{recipe.title}</Text>
+              <TouchableOpacity onPress={() => handleUnFavorite(index)}>
+                <Text>unFavorite</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.recipeDescription}>{recipe.description}</Text>
+            <View style={styles.ratingContainer}></View>
           </View>
-          <Text style={styles.recipeDescription}>{recipe.description}</Text>
-          <View style={styles.ratingContainer}>
-            
-          </View>
-        </View>
+        </TouchableOpacity>
       ))}
     </ScrollView>
   );

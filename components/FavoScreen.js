@@ -11,7 +11,7 @@ const FavoScreen = props => {
         <Image style={styles.yourfavoriteIcon} source={require('../assets/icons/YourFavoritesIcon.png')} />
         <Image style={styles.logo} source={require('../assets/icons/FlavorFolioSmallIcon.png')} />
       </View>
-     <FavoRecipeList favoriteList={favoriteList} setFavoriteList={setFavoriteList} />
+     <FavoRecipeList favoriteList={favoriteList} setFavoriteList={setFavoriteList} navigation={props.navigation} />
     </View>
   );
 };
