@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   listItemStyle: {
     flexDirection: "row",
-    alignItems: "center", // Vertikal zentriert die Elemente
+    alignItems: "center",
     borderWidth: 2,
     borderColor: "#CCC",
     borderRadius: 10,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   textContainer: {
-    flex: 1, // Damit nimmt der Text-Container den verfügbaren Platz ein
+    flex: 1,
   },
   contentContainer: {
     flexDirection: "row",

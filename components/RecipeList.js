@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,15 +9,22 @@ import {
 } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 
-const RecipeList = props => {
-  const {recipeList, setRecipeList, favoriteList, setFavoriteList, navigation, filteredRecipeList} = props;
+const RecipeList = (props) => {
+  const {
+    recipeList,
+    setRecipeList,
+    favoriteList,
+    setFavoriteList,
+    navigation,
+    filteredRecipeList,
+  } = props;
 
-  const handleFavorite = index => {
+  const handleFavorite = (index) => {
     const recipe = recipeList[index];
     props.setFavoriteList([...props.favoriteList, recipe]);
   };
 
-  const handleDeleteRecipe = index => {
+  const handleDeleteRecipe = (index) => {
     const newRecipeList = [...props.recipeList];
     newRecipeList.splice(index, 1);
     props.setRecipeList(newRecipeList);
@@ -34,37 +41,42 @@ const RecipeList = props => {
       <ScrollView style={styles.scrollviewstyle}>
         {filteredRecipeList.map((recipe, index) => (
           <Swipeable
-          key={index}
-          renderRightActions={() => (
+            key={index}
+            renderRightActions={() => (
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={() => handleDeleteRecipe(index)}
+              >
+                <Text style={styles.deleteButtonText}>
+                  Are you sure you want to delete this recipe?
+                </Text>
+              </TouchableOpacity>
+            )}
+          >
             <TouchableOpacity
-              style={styles.deleteButton}
-              onPress={() => handleDeleteRecipe(index)}
+              onPress={() => props.navigation.navigate('Recipe', { recipe: recipe })}
             >
-              <Text style={styles.deleteButtonText}>Are you sure you want to delete this recipe?</Text>
+              <View style={styles.listItemStyle} key={index}>
+                <View style={styles.imageContainer}>
+                  <Image
+                    style={styles.image}
+                    source={{ uri: `data:image/png;base64,${recipe.image}` }}
+                  />
+                </View>
+                <View style={styles.textContainer}>
+                  <View style={styles.recipeHeader}>
+                  <Text style={styles.recipeName}>{recipe.title}</Text>
+                  <TouchableOpacity onPress={() => handleFavorite(index)}>
+                    <Image
+                      source={require('../assets/icons/Favourite-check.png')}
+                      style={styles.imagecheck}
+                    />
+                  </TouchableOpacity>
+                  </View>
+                  <Text style={styles.recipeDescription}>{recipe.description}</Text>
+                </View>
+              </View>
             </TouchableOpacity>
-          )}
-        >
-          <TouchableOpacity
-            onPress={() =>
-              props.navigation.navigate('Recipe', {recipe: recipe})
-            }>
-            <View style={styles.listItemStyle} key={index}>
-              <Image
-                  style={styles.image}
-                  source={{ uri: `data:image/png;base64,${recipe.image}` }} // Assuming 'recipe.image' is the base64-encoded image string
-              />
-              <View style={styles.recipeHeader}>
-                <Text style={styles.recipeName}>{recipe.title}</Text>
-                <TouchableOpacity onPress={() => handleFavorite(index)}>
-                <Text style={styles.recipeName}>Add to Favorites</Text>
-                </TouchableOpacity>
-              </View>
-              <Text style={styles.recipeDescription}>{recipe.description}</Text>
-              <View style={styles.ratingContainer}>
-
-              </View>
-            </View>
-          </TouchableOpacity>
           </Swipeable>
         ))}
       </ScrollView>
@@ -82,20 +94,23 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   listItemStyle: {
+    flexDirection: 'row',
     borderWidth: 2,
-    borderColor: "#CCC",
+    borderColor: '#CCC',
     borderRadius: 10,
     padding: 10,
     marginBottom: 15,
-    backgroundColor: "#F8F8F8",
+    backgroundColor: '#F8F8F8',
     elevation: 5,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
-  recipeHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 5,
+  imageContainer: {
+    marginRight: 10,
+    justifyContent: 'center', // Vertikal zentrieren
+  },
+  textContainer: {
+    flex: 1,
+    justifyContent: 'center', // Vertikal zentrieren
   },
   recipeName: {
     fontSize: 16,
@@ -105,10 +120,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#666',
     marginBottom: 5,
-  },
-  ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   deleteButton: {
     backgroundColor: 'red',
@@ -124,9 +135,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
+    width: 90,
+    height: 90,
+  },
+  imagecheck: {
+    width: 30,
+    height: 30,
+  },
+  recipeHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5,
   },
 });
 
