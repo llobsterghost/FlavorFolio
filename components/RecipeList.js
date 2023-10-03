@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
 import { Swipeable } from 'react-native-gesture-handler';
 
 const RecipeList = props => {
@@ -55,11 +54,7 @@ const RecipeList = props => {
               </View>
               <Text style={styles.recipeDescription}>{recipe.description}</Text>
               <View style={styles.ratingContainer}>
-                <Ionicons name="star" size={24} color="#FFD700" />
-                <Ionicons name="star" size={24} color="#FFD700" />
-                <Ionicons name="star" size={24} color="#FFD700" />
-                <Ionicons name="star" size={24} color="#FFD700" />
-                <Ionicons name="star-outline" size={24} color="#FFD700" />
+                
               </View>
             </View>
           </TouchableOpacity>

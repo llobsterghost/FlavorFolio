@@ -9,7 +9,6 @@ import {
     StyleSheet,
     TextInput,
     Image,
-    TouchableOpacity,
     PermissionsAndroid,
     Platform,
     Alert,
@@ -17,18 +16,20 @@ import {
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import StarRating from 'react-native-star-rating-widget';
 
-const AddRecipeScreen = () => {
+const AddRecipeScreen = (props) => {
 
-    const [recipeName, setRecipeName] = useState('');
-    const [recipeDescription, setRecipeDescription] = useState('');
-    const [ingredients, setIngredients] = useState('');
-    const [howToCook, setHowToCook] = useState('');
-    const [selectedImage, setSelectedImage] = useState(null);
+    const recipe = props.route?.params?.recipe;
 
-    const [level, setLevel] = useState('easy');
-    const [type, setType] = useState('Pre-meal');
-    const [cookTime, setCookTime] = useState('');
-    const [rating, setRating] = useState(0);
+    const [recipeName, setRecipeName] = useState(recipe ? recipe.name : '');
+    const [recipeDescription, setRecipeDescription] = useState(recipe ? recipe.description : '');
+      const [ingredients, setIngredients] = useState(recipe ? recipe.ingredients.join('\n') : '');
+      const [howToCook, setHowToCook] = useState(recipe ? recipe.howToCook.join('\n') : '');
+      const [selectedImage, setSelectedImage] = useState(recipe ? recipe.image : null);
+    
+      const [level, setLevel] = useState(recipe ? recipe.level : 'easy');
+      const [type, setType] = useState(recipe ? recipe.type : 'Pre-meal');
+      const [cookTime, setCookTime] = useState(recipe ? recipe.cookTime : '');
+      const [rating, setRating] = useState(recipe ? recipe.rating : 0);
 
     const timeIcon = require('../assets/icons/time.png');
     const levelIcon = require('../assets/icons/level.png');
@@ -259,11 +260,9 @@ const AddRecipeScreen = () => {
                 value={howToCook}
                 onChangeText={(text) => setHowToCook(text)}
             />
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.saveCancelButton} onPress={handleSave}>
-                    <Text style={styles.buttonText}>Save</Text>
-                </TouchableOpacity>
-            </View>
+
+           <Button title="Save" onPress={handleSave} />
+
         </ScrollView>
     );
 };

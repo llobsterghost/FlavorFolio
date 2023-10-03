@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
 
 const FavoRecipeList = props => {
   const {favoriteList, setFavoriteList} = props;
@@ -29,11 +28,7 @@ const FavoRecipeList = props => {
           </View>
           <Text style={styles.recipeDescription}>{recipe.description}</Text>
           <View style={styles.ratingContainer}>
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star" size={24} color="#FFD700" />
-            <Ionicons name="star-outline" size={24} color="#FFD700" />
+          
           </View>
         </View>
       ))}
