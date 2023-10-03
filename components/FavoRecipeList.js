@@ -10,7 +10,7 @@ import {
 
 const FavoRecipeList = props => {
   const { favoriteList, setFavoriteList } = props;
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
+
 
 
   const handleUnFavorite = index => {
@@ -26,10 +26,9 @@ const FavoRecipeList = props => {
           <Image style={styles.image} source={{ uri: recipe.imagePath }} />
           <View style={styles.recipeHeader}>
             <Text style={styles.recipeName}>{recipe.title}</Text>
-
             <TouchableOpacity onPress={() => handleUnFavorite(index)}>
               <Image
-                source={isButtonClicked ? require("../assets/icons/Favourite-check.png") : require("../assets/icons/Favourite-checked.png")}
+                source={require("../assets/icons/Favourite-checked.png")}
                 style={styles.imagechecked}
               />
             </TouchableOpacity>
