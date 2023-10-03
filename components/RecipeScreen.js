@@ -21,7 +21,7 @@ const RecipeScreen = props => {
         </View>
         <View style={styles.recipeContainer}>
           <Text style={styles.recipeName}>{recipe.title}</Text>
-          <Image style={styles.logo} source={{uri: recipe.imagePath}} />
+          {/*<Image style={styles.logo} source={{uri: recipe.imagePath}} />*/}
 
           <View style={styles.ratingContainer}>
             <Text style={styles.recipeDescription}>{recipe.description}</Text>
