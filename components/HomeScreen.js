@@ -30,7 +30,7 @@ const HomeScreen = props => {
           source={require('../assets/icons/FlavorFolioIcon.png')}
         />
         <TouchableOpacity
-          onPress={() => props.navigation.navigate('AddRecipe')}>
+          onPress={() => props.navigation.navigate("AddRecipe")}>
           <Image
             style={styles.iconAdd}
             source={require('../assets/icons/IconAddPage.png')}

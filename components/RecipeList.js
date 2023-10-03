@@ -49,7 +49,7 @@ const RecipeList = props => {
               props.navigation.navigate('Recipe', {recipe: recipe})
             }>
             <View style={styles.listItemStyle} key={index}>
-            <Image style={styles.image} source={require(recipe.imagePath)} />
+            {/*<Image style={styles.image} source={require(recipe.imagePath)} />*/}
               <View style={styles.recipeHeader}>
                 <Text style={styles.recipeName}>{recipe.title}</Text>
                 <TouchableOpacity onPress={() => handleFavorite(index)}>
