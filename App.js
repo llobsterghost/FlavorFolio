@@ -14,6 +14,8 @@ const App = () => {
   const [recipeList, setRecipeList] = useState([]);
   const [favoriteList, setFavoriteList] = useState([]);
 
+  const URL = "https://20231004t113619-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/readallrecipes";
+
   const addRecipe = recipe => {
     setRecipeList([...recipeList, recipe]);
   };
@@ -21,7 +23,7 @@ const App = () => {
   const fetchRecipes = async () => {
     try {
       const response = await fetch(
-        'https://20231003t152124-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/readallrecipes',
+        URL,
       );
       const data = await response.json();
       setRecipeList(data);
@@ -57,6 +59,8 @@ const App = () => {
                 setRecipeList={setRecipeList}
                 favoriteList={favoriteList}
                 setFavoriteList={setFavoriteList}
+                useEffect={useEffect}
+                URL={URL}
               />
             )}
           </Stack.Screen>

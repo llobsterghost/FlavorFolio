@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Picker} from '@react-native-picker/picker';
+import Dropdown from './DropDown';
 
 import {
   Text,
@@ -20,24 +21,23 @@ import StarRating from 'react-native-star-rating-widget';
 const AddRecipeScreen = props => {
   const recipe = props.route?.params?.recipe;
 
-  const [recipeName, setRecipeName] = useState(recipe ? recipe.name : '');
+  const [recipeName, setRecipeName] = useState(recipe ? recipe.title : '');
   const [recipeDescription, setRecipeDescription] = useState(
     recipe ? recipe.description : '',
   );
   const [ingredients, setIngredients] = useState(
-    recipe ? recipe.ingredients.join('\n') : '',
+    recipe ? recipe.ingredients : '',
   );
-  const [howToCook, setHowToCook] = useState(
-    recipe ? recipe.howToCook.join('\n') : '',
-  );
+  const [howToCook, setHowToCook] = useState(recipe ? recipe.preparation : '');
   const [selectedImage, setSelectedImage] = useState(
     recipe ? recipe.image : null,
   );
 
-  const [level, setLevel] = useState(recipe ? recipe.level : 'easy');
+  const [level, setLevel] = useState(recipe ? recipe.difficultyLevel : 'Easy');
   const [type, setType] = useState(recipe ? recipe.type : 'Pre-meal');
-  const [cookTime, setCookTime] = useState(recipe ? recipe.cookTime : '');
-  const [rating, setRating] = useState(recipe ? recipe.rating : 0);
+  const [prepTime, setPreptime] = useState(recipe ? recipe.preptime : 0);
+  const [cookTime, setCooktime] = useState(recipe ? recipe.cooktime : 0);
+  const [rating, setRating] = useState(recipe ? recipe.stars : 0);
 
   const timeIcon = require('../assets/icons/time.png');
   const levelIcon = require('../assets/icons/level.png');
@@ -49,10 +49,6 @@ const AddRecipeScreen = props => {
 
   const handleTypeChange = value => {
     setType(value);
-  };
-
-  const handleRatingChange = rating => {
-    setRating(rating);
   };
 
   const requestPermissions = async () => {
@@ -81,7 +77,6 @@ const AddRecipeScreen = props => {
           console.log('Camera and storage permissions granted');
         } else {
           console.log('Permissions denied');
-          // You can display an error message to the user if permissions are denied.
           Alert.alert(
             'Permissions Denied',
             'Please allow camera and storage permissions to use this feature.',
@@ -93,7 +88,6 @@ const AddRecipeScreen = props => {
     }
   };
 
-  // Request permissions when the component mounts
   useEffect(() => {
     requestPermissions();
   }, []);
@@ -111,7 +105,6 @@ const AddRecipeScreen = props => {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('Image picker error: ', response.error);
-        // Display an error message to the user
         Alert.alert(
           'Image Picker Error',
           'There was an error while picking an image. Please try again.',
@@ -136,7 +129,6 @@ const AddRecipeScreen = props => {
         console.log('User cancelled camera');
       } else if (response.error) {
         console.log('Camera error: ', response.error);
-        // Display an error message to the user
         Alert.alert(
           'Camera Error',
           'There was an error while opening the camera. Please try again.',
@@ -149,20 +141,19 @@ const AddRecipeScreen = props => {
   };
 
   const handleSave = async () => {
-    // Prepare the recipe object to be sent to the REST endpoint
     const recipeData = {
       title: recipeName,
       description: recipeDescription,
       image_path: selectedImage,
       stars: rating,
-      preptime: cookTime,
+      preptime: prepTime,
+      cooktime: cookTime,
       difficulty_level: level,
       ingredients: ingredients,
       preparation: howToCook,
     };
 
     try {
-      // Make a POST request to the REST endpoint
       const response = await fetch('YOUR_REST_ENDPOINT_URL_HERE', {
         method: 'POST',
         headers: {
@@ -175,11 +166,9 @@ const AddRecipeScreen = props => {
         console.log('Recipe saved successfully');
       } else {
         console.error('Failed to save recipe');
-        // TODO: alert to user that recipe was not saved
       }
     } catch (error) {
       console.error('Error saving recipe:', error);
-      // TODO: alert to user that recipe was not saved
     }
   };
 
@@ -198,7 +187,7 @@ const AddRecipeScreen = props => {
         {selectedImage ? (
           <Image
             source={{uri: selectedImage}}
-            style={styles.image} // Adjust image dimensions as needed
+            style={styles.image}
             resizeMode="contain"
           />
         ) : (
@@ -225,10 +214,17 @@ const AddRecipeScreen = props => {
         <Image source={timeIcon} style={styles.icon} />
         <TextInput
           style={styles.input}
+          placeholder="Prep Time (minutes)"
+          keyboardType="numeric"
+          value={prepTime.toString()}
+          onChangeText={text => setPreptime(text)}
+        />
+        <TextInput
+          style={styles.input}
           placeholder="Cook Time (minutes)"
           keyboardType="numeric"
-          value={cookTime}
-          onChangeText={text => setCookTime(text)}
+          value={cookTime.toString()}
+          onChangeText={text => setCooktime(text)}
         />
       </View>
       <View style={styles.ratingContainer}>
@@ -237,25 +233,36 @@ const AddRecipeScreen = props => {
       </View>
       <View style={styles.inputGroup}>
         <Image source={levelIcon} style={styles.icon} />
-        <Picker
+        <Dropdown
+          options={['Easy', 'Medium', 'Hard']}
+          selectedValue={level}
+          onValueChange={handleLevelChange}
+        />
+        {/*<Picker
           selectedValue={level}
           style={styles.levelPicker}
           onValueChange={handleLevelChange}>
+          <Picker.Item label={level} value={level} />
           <Picker.Item label="Easy" value="easy" />
           <Picker.Item label="Medium" value="medium" />
           <Picker.Item label="Hard" value="hard" />
-        </Picker>
+        </Picker>*/}
       </View>
       <View style={styles.inputGroup}>
         <Image source={typeIcon} style={styles.icon} />
-        <Picker
+        <Dropdown
+          options={['Pre-meal', 'breakfast', 'salad', 'Main dish', 'Dessert']}
+          selectedValue={type}
+          onValueChange={handleTypeChange}
+        />
+        {/*<Picker
           selectedValue={type}
           style={styles.typePicker}
           onValueChange={handleTypeChange}>
           <Picker.Item label="Pre-meal" value="pre-meal" />
-          <Picker.Item label="Main spit" value="main spit" />
+          <Picker.Item label="Main dish" value="main dish" />
           <Picker.Item label="Dessert" value="dessert" />
-        </Picker>
+      </Picker>*/}
       </View>
       <TextInput
         style={styles.input}
@@ -281,7 +288,6 @@ const AddRecipeScreen = props => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1, // Make the content take as much space as needed
     backgroundColor: '#fff',
     padding: 20,
   },
@@ -363,7 +369,6 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: 10,
   },
-
   levelPicker: {
     width: 200,
     height: 44,

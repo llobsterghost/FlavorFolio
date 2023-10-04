@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { Swipeable } from 'react-native-gesture-handler';
+import {Swipeable} from 'react-native-gesture-handler';
+import StarRating from 'react-native-star-rating-widget';
 
-const RecipeList = (props) => {
+const RecipeList = props => {
   const {
     recipeList,
     setRecipeList,
@@ -45,35 +46,33 @@ const RecipeList = (props) => {
             renderRightActions={() => (
               <TouchableOpacity
                 style={styles.deleteButton}
-                onPress={() => handleDeleteRecipe(index)}
-              >
+                onPress={() => handleDeleteRecipe(index)}>
                 <Text style={styles.deleteButtonText}>
                   Are you sure you want to delete this recipe?
                 </Text>
               </TouchableOpacity>
-            )}
-          >
+            )}>
             <TouchableOpacity
-              onPress={() => props.navigation.navigate('Recipe', { recipe: recipe })}
-            >
+              onPress={() =>
+                props.navigation.navigate('Recipe', {recipe: recipe})
+              }>
               <View style={styles.listItemStyle} key={index}>
                 <View style={styles.imageContainer}>
                   <Image
                     style={styles.image}
                     source={{ uri: `data:image/png;base64,${recipe.image}` }}
                   />
-                </View>
-                <View style={styles.textContainer}>
-                  <View style={styles.recipeHeader}>
+                <View style={styles.recipeHeader}>
                   <Text style={styles.recipeName}>{recipe.title}</Text>
                   <TouchableOpacity onPress={() => handleFavorite(index)}>
-                    <Image
-                      source={require('../assets/icons/Favourite-check.png')}
-                      style={styles.imagecheck}
-                    />
+                    <Text style={styles.recipeName}>Add to Favorites</Text>
                   </TouchableOpacity>
-                  </View>
-                  <Text style={styles.recipeDescription}>{recipe.description}</Text>
+                </View>
+                <Text style={styles.recipeDescription}>
+                  {recipe.description}
+                </Text>
+                <View style={styles.ratingContainer}>
+                  <StarRating rating={recipe.stars} onChange={() => {}} />
                 </View>
               </View>
             </TouchableOpacity>
