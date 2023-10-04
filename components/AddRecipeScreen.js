@@ -173,7 +173,8 @@ const AddRecipeScreen = props => {
 
       if (response.ok) {
         console.log('Recipe saved successfully');
-
+        alert('Recipe saved successfully');
+        props.navigation.goBack();
       } else {
         console.error('Response code:', response.status);
         response.text().then((responseData) => {
@@ -212,8 +213,8 @@ const AddRecipeScreen = props => {
         <View style={{flex: 1, justifyContent: 'center'}}>
           {selectedImage ? (
               <Image
-                  //source={{uri: selectedImage}}
-                  source={{uri: `data:image/png;base64,${selectedImage}`}}
+                  source={{uri: selectedImage}}
+                  //source={{uri: `data:image/png;base64,${selectedImage}`}}
                   style={styles.image}
                   resizeMode="contain"
               />
