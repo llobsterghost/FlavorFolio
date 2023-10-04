@@ -149,21 +149,34 @@ const AddRecipeScreen = props => {
   };
 
   const handleSave = async () => {
+    // Convert the selected image to byte[] format
+    let imageBytes = null;
+    if (selectedImage) {
+      try {
+        const response = await fetch(selectedImage);
+        const blob = await response.blob();
+        imageBytes = await blobToBase64(blob);
+      } catch (error) {
+        console.error('Error converting image to byte[]:', error);
+        // Handle the error accordingly
+      }
+    }
+
     // Prepare the recipe object to be sent to the REST endpoint
     const recipeData = {
       title: recipeName,
       description: recipeDescription,
-      image_path: selectedImage,
+      image: imageBytes,
       stars: rating,
       preptime: cookTime,
-      difficulty_level: level,
+      difficultyLevel: level,
       ingredients: ingredients,
       preparation: howToCook,
     };
 
     try {
       // Make a POST request to the REST endpoint
-      const response = await fetch('YOUR_REST_ENDPOINT_URL_HERE', {
+      const response = await fetch('https://20231003t155003-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/addrecipe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -173,7 +186,15 @@ const AddRecipeScreen = props => {
 
       if (response.ok) {
         console.log('Recipe saved successfully');
+
       } else {
+        // Log the response code
+        console.error('Response code:', response.status);
+        // Log the response data (if available)
+        response.text().then((responseData) => {
+          console.error('Response data:', responseData);
+          // TODO: You can also alert the user here with responseData
+        });
         console.error('Failed to save recipe');
         // TODO: alert to user that recipe was not saved
       }
@@ -181,6 +202,18 @@ const AddRecipeScreen = props => {
       console.error('Error saving recipe:', error);
       // TODO: alert to user that recipe was not saved
     }
+  };
+
+  const blobToBase64 = async (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result.split(',')[1];
+        resolve(base64String);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
   };
 
   return (
