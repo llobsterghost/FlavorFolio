@@ -9,10 +9,20 @@ import {
 import RecipeList from './RecipeList';
 
 const HomeScreen = props => {
-  const {recipeList, setRecipeList, favoriteList, setFavoriteList} = props;
+  const {recipeList, setRecipeList, favoriteList, setFavoriteList, URL} = props;
   const [text, setText] = React.useState('');
   const textInputHandler = enteredText => {
     setText(enteredText);
+  };
+
+  const handleRefresh = async () => {
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
+      setRecipeList(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const searchFilterFunction = recipe => {
@@ -58,6 +68,12 @@ const HomeScreen = props => {
           value={text}
           placeholder="Search for recipes..."
         />
+        <TouchableOpacity onPress={handleRefresh}>
+        <Image
+          style={styles.iconRefresh}
+          source={require('../assets/icons/refresh.png')}
+        />
+      </TouchableOpacity>
       </View>
 
       <RecipeList
@@ -157,6 +173,12 @@ const styles = StyleSheet.create({
   iconContainer: {
     marginLeft: 10,
     marginRight: 5,
+  },
+  iconRefresh: {
+    width: 30,
+    height: 30,
+    flexShrink: 0,
+    marginRight: 10,
   },
 });
 
