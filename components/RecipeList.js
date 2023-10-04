@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,11 +6,11 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-} from "react-native";
-import { Swipeable } from "react-native-gesture-handler";
-import StarRating from "react-native-star-rating-widget";
+} from 'react-native';
+import {Swipeable} from 'react-native-gesture-handler';
+import StarRating from 'react-native-star-rating-widget';
 
-const RecipeList = (props) => {
+const RecipeList = props => {
   const {
     recipeList,
     setRecipeList,
@@ -20,12 +20,18 @@ const RecipeList = (props) => {
     filteredRecipeList,
   } = props;
 
-  const handleFavorite = (index) => {
+  const handleFavorite = index => {
     const recipe = recipeList[index];
-    props.setFavoriteList([...props.favoriteList, recipe]);
+    if (ifFavorite(recipe)) {
+      setFavoriteList(favoriteList.filter((fav) => fav.id !== recipe.id));
+    } else {
+      if (!favoriteList.some((fav) => fav.id === recipe.id)) {
+        setFavoriteList([...favoriteList, recipe]);
+      }
+    }
   };
 
-  const handleDeleteRecipe = (index) => {
+  const handleDeleteRecipe = index => {
     const newRecipeList = [...props.recipeList];
     newRecipeList.splice(index, 1);
     props.setRecipeList(newRecipeList);
@@ -35,6 +41,10 @@ const RecipeList = (props) => {
       newFavoriteList.splice(index, 1);
       props.setFavoriteList(newFavoriteList);
     }
+  };
+
+  const ifFavorite = recipe => {
+    return props.favoriteList.includes(recipe);
   };
 
   return (
@@ -51,11 +61,11 @@ const RecipeList = (props) => {
                   Are you sure you want to delete this recipe?
                 </Text>
               </TouchableOpacity>
-            )}
-          >
+            )}>
             <TouchableOpacity
-              onPress={() => props.navigation.navigate("Recipe", { recipe: recipe })}
-            >
+              onPress={() =>
+                props.navigation.navigate('Recipe', {recipe: recipe})
+              }>
               <View style={styles.listItemStyle} key={index}>
                 <View style={styles.row}>
                   <View style={styles.imageContainer}>
@@ -67,12 +77,17 @@ const RecipeList = (props) => {
                   <View style={styles.textContainer}>
                     <View style={styles.recipeHeader}>
                       <Text style={styles.recipeName}>{recipe.title}</Text>
-                      <TouchableOpacity onPress={() => handleFavorite(index)}>
+                      <TouchableOpacity onPress={() => handleFavorite(index)}>{ifFavorite(recipe) ? (
+                            <Image
+                              source={require('../assets/icons/Favourite-checked.png')}
+                              style={styles.imagecheck}
+                            />
+                          ) : (
                         <Image
                           source={require("../assets/icons/Favourite-check.png")}
                           style={styles.imagecheck}
                         />
-                      </TouchableOpacity>
+                      )}</TouchableOpacity>
                     </View>
                     <Text style={styles.recipeDescription}>{recipe.description}</Text>
                   </View>
