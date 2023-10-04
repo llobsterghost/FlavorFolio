@@ -4,7 +4,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import StarRating from 'react-native-star-rating-widget';
 
 const RecipeScreen = props => {
-  const {recipe} = props.route.params;
+  const { recipe } = props.route.params;
   const [count, setCount] = useState(0);
 
   const handleCookedPress = () => {
@@ -14,15 +14,21 @@ const RecipeScreen = props => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollviewstyle}>
-        <View style={styles.header}>
-          <Image
-            style={styles.logo}
-            source={require('../assets/icons/FlavorFolioSmallIcon.png')}
-          />
-        </View>
+        {/*<View style={styles.header}>*/}
+        {/*  <Image*/}
+        {/*    style={styles.logo}*/}
+        {/*    source={require('../assets/icons/FlavorFolioSmallIcon.png')}*/}
+        {/*  />*/}
+        {/*</View>*/}
         <View style={styles.recipeContainer}>
           <Text style={styles.recipeName}>{recipe.title}</Text>
-          {/*<Image style={styles.logo} source={{uri: recipe.imagePath}} />*/}
+
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.image}
+              source={{ uri: `data:image/png;base64,${recipe.image}` }}
+            />
+          </View>
 
           <View style={styles.ratingContainer}>
             <Text style={styles.recipeDescription}>{recipe.description}</Text>
@@ -35,8 +41,10 @@ const RecipeScreen = props => {
             <Text style={styles.cookedText}>
               How many times have you cooked this meal?
             </Text>
+            <View class={styles.row}>
             <Text style={styles.cookedCount}>{count}</Text>
             <Button title="Cooked" onPress={handleCookedPress} />
+            </View>
           </View>
 
           <View style={styles.infoContainer}>
@@ -52,7 +60,7 @@ const RecipeScreen = props => {
             <View style={styles.levelContainer}>
               <Image
                 style={styles.levelIcon}
-                source={require('../assets/icons/level.png')}
+                source={require("../assets/icons/level.png")}
               />
               <Text style={styles.levelText}>{recipe.difficultyLevel}</Text>
             </View>
@@ -60,7 +68,7 @@ const RecipeScreen = props => {
             <View style={styles.typeContainer}>
               <Image
                 style={styles.typeIcon}
-                source={require('../assets/icons/type.png')}
+                source={require("../assets/icons/type.png")}
               />
               <Text style={styles.typeText}>{recipe.type}</Text>
             </View>
@@ -93,56 +101,56 @@ const RecipeScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: "#ccc",
   },
   logo: {
     width: 50,
-    height: 50,
+    height: 70,
   },
   recipeContainer: {
     padding: 20,
   },
   recipeName: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
+    alignSelf: "center",
   },
   recipeDescription: {
-    fontSize: 18,
-    marginBottom: 10,
+    fontSize: 15,
+    marginTop: 10,
   },
   ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 10,
   },
   infoContainer: {
     padding: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   cookedContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 10,
   },
   cookedText: {
-    fontSize: 18,
+    fontSize: 15,
     marginRight: 10,
   },
   cookedCount: {
     fontSize: 18,
     marginRight: 10,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   recipeIngredients: {
     fontSize: 18,
@@ -153,8 +161,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   timeContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 10,
   },
   timeIcon: {
@@ -167,8 +175,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   levelContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 10,
   },
   levelIcon: {
@@ -181,8 +189,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   typeContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 10,
   },
   typeIcon: {
@@ -195,8 +203,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   ingridientsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 10,
   },
   ingridientsText: {
@@ -204,8 +212,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   instructionsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 10,
   },
   instructionsText: {
@@ -213,14 +221,28 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   buttonContainer: {
-    width: '100%',
+    width: "100%",
     padding: 10,
-    backgroundColor: 'blue',
+    backgroundColor: "blue",
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    textAlign: 'center',
+    textAlign: "center",
+  },
+  imageContainer: {
+    marginRight: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    width: 300,
+    height: 300,
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
   },
 });
 
