@@ -8,6 +8,7 @@ import {
   Image,
 } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
+import StarRating from 'react-native-star-rating-widget';
 
 const RecipeList = (props) => {
   const {
@@ -57,6 +58,7 @@ const RecipeList = (props) => {
               onPress={() => props.navigation.navigate('Recipe', { recipe: recipe })}
             >
               <View style={styles.listItemStyle} key={index}>
+                <View style={styles.row}>
                 <View style={styles.imageContainer}>
                   <Image
                     style={styles.image}
@@ -74,6 +76,10 @@ const RecipeList = (props) => {
                   </TouchableOpacity>
                   </View>
                   <Text style={styles.recipeDescription}>{recipe.description}</Text>
+                </View>
+                </View>
+                <View style={styles.ratingContainer}>
+                  <StarRating rating={recipe.stars} onChange={() => {}}/>
                 </View>
               </View>
             </TouchableOpacity>
@@ -93,8 +99,10 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 15,
   },
-  listItemStyle: {
+  row:{
     flexDirection: 'row',
+  },
+  listItemStyle: {
     borderWidth: 2,
     borderColor: '#CCC',
     borderRadius: 10,
@@ -106,11 +114,11 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     marginRight: 10,
-    justifyContent: 'center', // Vertikal zentrieren
+    justifyContent: 'center',
   },
   textContainer: {
     flex: 1,
-    justifyContent: 'center', // Vertikal zentrieren
+    justifyContent: 'center',
   },
   recipeName: {
     fontSize: 16,
@@ -147,6 +155,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 5,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 });
 
