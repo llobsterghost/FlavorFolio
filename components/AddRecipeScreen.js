@@ -162,15 +162,16 @@ const AddRecipeScreen = props => {
       image: imageBytes,
       stars: rating,
       preptime: preptime,
-      cookTime: cooktime,
+      cooktime: cooktime,
       difficultyLevel: level,
+      type: type,
       ingredients: ingredients,
       preparation: howToCook,
     };
 
     try {
       // Make a POST request to the REST endpoint
-      const response = await fetch('https://20231003t155003-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/addrecipe', {
+      const response = await fetch('https://20231004t113619-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/addrecipe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
