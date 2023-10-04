@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -20,12 +20,12 @@ const RecipeList = props => {
     filteredRecipeList,
   } = props;
 
-  const handleFavorite = (index) => {
+  const handleFavorite = index => {
     const recipe = recipeList[index];
     props.setFavoriteList([...props.favoriteList, recipe]);
   };
 
-  const handleDeleteRecipe = (index) => {
+  const handleDeleteRecipe = index => {
     const newRecipeList = [...props.recipeList];
     newRecipeList.splice(index, 1);
     props.setRecipeList(newRecipeList);
@@ -57,11 +57,7 @@ const RecipeList = props => {
                 props.navigation.navigate('Recipe', {recipe: recipe})
               }>
               <View style={styles.listItemStyle} key={index}>
-                <View style={styles.imageContainer}>
-                  <Image
-                    style={styles.image}
-                    source={{ uri: `data:image/png;base64,${recipe.image}` }}
-                  />
+                {/*<Image style={styles.image} source={require(recipe.imagePath)} />*/}
                 <View style={styles.recipeHeader}>
                   <Text style={styles.recipeName}>{recipe.title}</Text>
                   <TouchableOpacity onPress={() => handleFavorite(index)}>
@@ -90,35 +86,32 @@ const styles = StyleSheet.create({
   },
   scrollviewstyle: {
     width: '100%',
-    marginTop: 15,
   },
   listItemStyle: {
-    flexDirection: 'row',
-    borderWidth: 2,
-    borderColor: '#CCC',
-    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
     padding: 10,
-    marginBottom: 15,
-    backgroundColor: '#F8F8F8',
-    elevation: 5,
-    overflow: 'hidden',
+    marginBottom: 10,
   },
-  imageContainer: {
-    marginRight: 10,
-    justifyContent: 'center', // Vertikal zentrieren
-  },
-  textContainer: {
-    flex: 1,
-    justifyContent: 'center', // Vertikal zentrieren
+  recipeHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5,
   },
   recipeName: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   recipeDescription: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#666',
     marginBottom: 5,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   deleteButton: {
     backgroundColor: 'red',
@@ -134,18 +127,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image: {
-    width: 90,
-    height: 90,
-  },
-  imagecheck: {
-    width: 30,
-    height: 30,
-  },
-  recipeHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 5,
+    width: 50,
+    height: 50,
+    marginRight: 10,
   },
 });
 
