@@ -74,7 +74,6 @@ const AddRecipeScreen = props => {
           console.log('Camera and storage permissions granted');
         } else {
           console.log('Permissions denied');
-          // You can display an error message to the user if permissions are denied.
           Alert.alert(
               'Permissions Denied',
               'Please allow camera and storage permissions to use this feature.',
@@ -86,7 +85,6 @@ const AddRecipeScreen = props => {
     }
   };
 
-  // Request permissions when the component mounts
   useEffect(() => {
     requestPermissions();
   }, []);
@@ -104,7 +102,6 @@ const AddRecipeScreen = props => {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('Image picker error: ', response.error);
-        // Display an error message to the user
         Alert.alert(
             'Image Picker Error',
             'There was an error while picking an image. Please try again.',
@@ -129,7 +126,6 @@ const AddRecipeScreen = props => {
         console.log('User cancelled camera');
       } else if (response.error) {
         console.log('Camera error: ', response.error);
-        // Display an error message to the user
         Alert.alert(
             'Camera Error',
             'There was an error while opening the camera. Please try again.',
@@ -142,7 +138,6 @@ const AddRecipeScreen = props => {
   };
 
   const handleSave = async () => {
-    // Convert the selected image to byte[] format
     let imageBytes = null;
     if (selectedImage) {
       try {
@@ -151,11 +146,9 @@ const AddRecipeScreen = props => {
         imageBytes = await blobToBase64(blob);
       } catch (error) {
         console.error('Error converting image to byte[]:', error);
-        // Handle the error accordingly
       }
     }
 
-    // Prepare the recipe object to be sent to the REST endpoint
     const recipeData = {
       title: recipeName,
       description: recipeDescription,
@@ -170,7 +163,6 @@ const AddRecipeScreen = props => {
     };
 
     try {
-      // Make a POST request to the REST endpoint
       const response = await fetch('https://20231004t113619-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/addrecipe', {
         method: 'POST',
         headers: {
@@ -183,19 +175,14 @@ const AddRecipeScreen = props => {
         console.log('Recipe saved successfully');
 
       } else {
-        // Log the response code
         console.error('Response code:', response.status);
-        // Log the response data (if available)
         response.text().then((responseData) => {
           console.error('Response data:', responseData);
-          // TODO: You can also alert the user here with responseData
         });
         console.error('Failed to save recipe');
-        // TODO: alert to user that recipe was not saved
       }
     } catch (error) {
       console.error('Error saving recipe:', error);
-      // TODO: alert to user that recipe was not saved
     }
   };
 
@@ -225,8 +212,9 @@ const AddRecipeScreen = props => {
         <View style={{flex: 1, justifyContent: 'center'}}>
           {selectedImage ? (
               <Image
-                  source={{uri: selectedImage}}
-                  style={styles.image} // Adjust image dimensions as needed
+                  //source={{uri: selectedImage}}
+                  source={{uri: `data:image/png;base64,${selectedImage}`}}
+                  style={styles.image}
                   resizeMode="contain"
               />
           ) : (
@@ -327,7 +315,7 @@ const AddRecipeScreen = props => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1, // Make the content take as much space as needed
+    flexGrow: 1,
     backgroundColor: '#fff',
     padding: 20,
   },
