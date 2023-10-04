@@ -1,3 +1,4 @@
+import { is } from '@babel/types';
 import React, {useState} from 'react';
 import {StyleSheet, View, Image, Text, Button} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -6,6 +7,8 @@ import StarRating from 'react-native-star-rating-widget';
 const RecipeScreen = props => {
   const { recipe } = props.route.params;
   const [count, setCount] = useState(0);
+
+  const isEdit = true;
 
   const handleCookedPress = () => {
     setCount(count + 1);
@@ -88,7 +91,7 @@ const RecipeScreen = props => {
             <Button
               title="Edit"
               onPress={() =>
-                props.navigation.navigate('AddRecipe', {recipe: recipe})
+                props.navigation.navigate('AddRecipe', {recipe: recipe, isEdit: isEdit})
               }
             />
           </View>
