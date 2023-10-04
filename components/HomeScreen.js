@@ -21,10 +21,6 @@ const HomeScreen = props => {
 
   useEffect(() => {
     const focusListener = props.navigation.addListener('focus', refreshOnFocus);
-
-    return () => {
-      focusListener.remove();
-    };
   }, [refreshOnFocus]);
 
   const handleRefresh = async () => {
