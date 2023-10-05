@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -14,6 +14,14 @@ const HomeScreen = props => {
   const textInputHandler = enteredText => {
     setText(enteredText);
   };
+
+  const refreshOnFocus = useCallback(() => {
+    handleRefresh();
+  }, []);
+
+  useEffect(() => {
+    const focusListener = props.navigation.addListener('focus', refreshOnFocus);
+  }, [refreshOnFocus]);
 
   const handleRefresh = async () => {
     try {
