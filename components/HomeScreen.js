@@ -183,8 +183,8 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   iconRefresh: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     flexShrink: 0,
     marginRight: 10,
   },
