@@ -15,13 +15,13 @@ const HomeScreen = props => {
     setText(enteredText);
   };
 
-  const refreshOnFocus = useCallback(() => {
-    handleRefresh();
-  }, []);
+  // const refreshOnFocus = useCallback(() => {
+  //   handleRefresh();
+  // }, []);
 
-  useEffect(() => {
-    const focusListener = props.navigation.addListener('focus', refreshOnFocus);
-  }, [refreshOnFocus]);
+  // useEffect(() => {
+  //   const focusListener = props.navigation.addListener('focus', refreshOnFocus);
+  // }, [refreshOnFocus]);
 
   const handleRefresh = async () => {
     try {

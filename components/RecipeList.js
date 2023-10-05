@@ -36,16 +36,16 @@ const RecipeList = props => {
     const recipeToDelete = props.recipeList[index];
 
     try {
-      await fetch(URL + `deleterecipe/${recipeToDelete.id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${props.token}`,
-        },
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    await fetch(URL + `deleterecipe/${recipeToDelete.id}`, {
+    method: 'DELETE',
+         headers: {
+           'Content-Type': 'application/json',
+           Authorization: `Bearer ${props.token}`,
+         },
+       });
+     } catch (error) {
+       console.error(error);
+     }
 
     const newRecipeList = [...props.recipeList];
     newRecipeList.splice(index, 1);
