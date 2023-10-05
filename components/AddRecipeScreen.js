@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {Picker} from '@react-native-picker/picker';
 import Dropdown from './DropDown';
 
 import {
@@ -12,7 +11,7 @@ import {
   Image,
   PermissionsAndroid,
   Platform,
-  Alert,
+  Alert, TouchableOpacity,
 } from 'react-native';
 
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
@@ -256,10 +255,19 @@ const AddRecipeScreen = props => {
     }
   };
 
+    function getImageExtension(imageData) {
+        if (imageData.indexOf('image/jpeg') === 0) {
+            return 'jpeg';
+        } else if (imageData.indexOf('image/png') === 0) {
+            return 'png';
+        }
+    }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Add Recipe</Text>
+        <Image style={styles.yourfavoriteIcon} source={require('../assets/icons/FavouritesHeading.png')} />
+          <Image style={styles.logo} source={require('../assets/icons/FlavorFolioSmallIcon.png')} />
       </View>
       <TextInput
         style={styles.input}
@@ -279,17 +287,21 @@ const AddRecipeScreen = props => {
             <Text style={styles.placeholderText}>No Image Selected</Text>
           </View>
         )}
-        <View style={{marginTop: 20}}>
-          <Button title="Choose from Device" onPress={openImagePicker} />
+        <View style={styles.buttonContainer}>
+            <TouchableOpacity
+                style={styles.customButton}
+                onPress={openImagePicker}
+          >
+              <Text style={styles.buttonText}>Choose from Device</Text>
+            </TouchableOpacity>
         </View>
-        <View style={{marginTop: 20, marginBottom: 50}}>
-          <Button title="Open Camera" onPress={handleCameraLaunch} />
-        </View>
-        <View style={{marginTop: 20}}>
-          <Button title="Choose from Device" onPress={openImagePicker} />
-        </View>
-        <View style={{marginTop: 20, marginBottom: 50}}>
-          <Button title="Open Camera" onPress={handleCameraLaunch} />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+                style={styles.customButton}
+                onPress={handleCameraLaunch}
+            >
+              <Text style={styles.buttonText}>Open Camera</Text>
+            </TouchableOpacity>
         </View>
       </View>
       <TextInput
@@ -310,73 +322,68 @@ const AddRecipeScreen = props => {
           onChangeText={text => setPreptime(text)}
         />
 
+          <TextInput
+              style={styles.input}
+              placeholder="Cook Time (minutes)"
+              keyboardType="numeric"
+              value={cooktime.toString()}
+              onChangeText={text => setCooktime(text)}
+          />
+        </View>
+        <View style={styles.ratingContainer}>
+          <Text style={styles.ratingText}>Rate this recipe:</Text>
+          <StarRating rating={rating} onChange={setRating} />
+        </View>
+        <View style={styles.inputGroup}>
+          <Image source={levelIcon} style={styles.icon} />
+          <Dropdown
+              options={['Easy', 'Medium', 'Hard']}
+              selectedValue={level}
+              onValueChange={handleLevelChange}
+          />
+        </View>
+        <View style={styles.inputGroup}>
+          <Image source={typeIcon} style={styles.icon} />
+          <Dropdown
+              options={['Pre-meal', 'breakfast', 'salad', 'Main dish', 'Dessert']}
+              selectedValue={type}
+              onValueChange={handleTypeChange}
+          />
+        </View>
         <TextInput
-          style={styles.input}
-          placeholder="Cook Time (minutes)"
-          keyboardType="numeric"
-          value={cooktime.toString()}
-          onChangeText={text => setCooktime(text)}
+            style={styles.input}
+            placeholder="Ingredients"
+            multiline={true}
+            numberOfLines={4}
+            value={ingredients}
+            onChangeText={text => setIngredients(text)}
         />
-      </View>
-      <View style={styles.ratingContainer}>
-        <Text style={styles.ratingText}>Rate this recipe:</Text>
-        <StarRating rating={rating} onChange={setRating} />
-      </View>
-      <View style={styles.inputGroup}>
-        <Image source={levelIcon} style={styles.icon} />
-        <Dropdown
-          options={['Easy', 'Medium', 'Hard']}
-          selectedValue={level}
-          onValueChange={handleLevelChange}
+        <TextInput
+            style={styles.input}
+            placeholder="How to cook"
+            multiline={true}
+            numberOfLines={4}
+            value={howToCook}
+            onChangeText={text => setHowToCook(text)}
         />
-        {/*<Picker
-          selectedValue={level}
-          style={styles.levelPicker}
-          onValueChange={handleLevelChange}>
-          <Picker.Item label="Easy" value="easy" />
-          <Picker.Item label="Medium" value="medium" />
-          <Picker.Item label="Hard" value="hard" />
-        </Picker>*/}
-      </View>
-      <View style={styles.inputGroup}>
-        <Image source={typeIcon} style={styles.icon} />
-        <Dropdown
-          options={['Pre-meal', 'breakfast', 'salad', 'Main dish', 'Dessert']}
-          selectedValue={type}
-          onValueChange={handleTypeChange}
-        />
-        {/*<Picker
-          selectedValue={type}
-          style={styles.typePicker}
-          onValueChange={handleTypeChange}>
-          <Picker.Item label="Pre-meal" value="pre-meal" />
-          <Picker.Item label="Main dish" value="main dish" />
-          <Picker.Item label="Dessert" value="dessert" />
-      </Picker>*/}
-      </View>
-      <TextInput
-        style={styles.input}
-        placeholder="Ingredients"
-        multiline={true}
-        numberOfLines={4}
-        value={ingredients}
-        onChangeText={text => setIngredients(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="How to cook"
-        multiline={true}
-        numberOfLines={4}
-        value={howToCook}
-        onChangeText={text => setHowToCook(text)}
-      />
 
-      {isEdit ? (
-        <Button title="Update" onPress={handleUpdate} />
-      ) : (
-        <Button title="Add" onPress={handleSave} />
-      )}
-    </ScrollView>
+        <View style={styles.buttonContainer}>
+            {isEdit ? (
+                <TouchableOpacity
+                  style={styles.editButton}
+                  onPress={handleUpdate}
+                >
+                    <Text style={styles.saveButtonText}>Edit</Text>
+                </TouchableOpacity>) : (
+                <TouchableOpacity
+                    style={styles.saveButton}
+                    onPress={handleSave}
+                >
+                    <Text style={styles.saveButtonText}>Save</Text>
+                </TouchableOpacity>
+            )}
+        </View>
+      </ScrollView>
   );
 };
 
@@ -399,16 +406,51 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     position: 'relative',
   },
-  headerText: {
-    fontSize: 26,
-    fontWeight: 'bold',
+  logo: {
+    width: 40,
+    height: 50,
+    position: 'absolute',
+    top: 20,
+    right: 20,
+  },
+  yourfavoriteIcon:{
+    width: 255,
+    height: 38,
+    marginTop: 5,
   },
   input: {
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
     padding: 8,
-    marginBottom: 16,
+    marginTop: 8,
+    marginBottom: 8,
+    marginRight: 6,
+    marginLeft: 6
+  },
+  buttonContainer: {
+    marginBottom: 20,
+  },
+  customButton: {
+    borderWidth: 2,
+    borderColor: "#CCC",
+    borderRadius: 10,
+    padding: 10,
+    backgroundColor: "#F8F8F8", // Hintergrundfarbe des Buttons
+    elevation: 5,
+    overflow: "hidden",
+  },
+  buttonText: {
+    color: "#7c7b7b",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  saveButtonText: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
   },
   image: {
     width: '100%',
@@ -450,7 +492,6 @@ const styles = StyleSheet.create({
   starStyle: {
     marginRight: 5,
   },
-
   inputGroup: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -464,7 +505,6 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: 10,
   },
-
   levelPicker: {
     width: 200,
     height: 44,
@@ -483,24 +523,25 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginBottom: 10,
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-  },
-  saveCancelButton: {
-    backgroundColor: 'green',
+  saveButton: {
+    backgroundColor: '#27AE60',
     padding: 10,
     borderRadius: 5,
     flex: 1,
-    marginRight: 10,
+    marginRight: 6,
+    marginLeft: 6,
     alignItems: 'center',
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+  editButton: {
+    backgroundColor: '#0B3D91',
+    padding: 10,
+    borderRadius: 5,
+    flex: 1,
+    marginRight: 6,
+    marginLeft: 6,
+    alignItems: 'center',
+  }
+
 });
 
 export default AddRecipeScreen;

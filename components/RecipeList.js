@@ -1,25 +1,18 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
 import {Swipeable} from 'react-native-gesture-handler';
 import StarRating from 'react-native-star-rating-widget';
 
 const RecipeList = props => {
-  const {
-    recipeList,
-    setRecipeList,
-    favoriteList,
-    setFavoriteList,
-    navigation,
-    filteredRecipeList,
-    URL,
-  } = props;
+    const {
+        recipeList,
+        setRecipeList,
+        favoriteList,
+        setFavoriteList,
+        navigation,
+        filteredRecipeList,
+        URL,
+    } = props;
 
   const handleFavorite = index => {
     const recipe = recipeList[index];
@@ -61,9 +54,9 @@ const RecipeList = props => {
     }
   };
 
-  const ifFavorite = recipe => {
-    return props.favoriteList.includes(recipe);
-  };
+    const ifFavorite = recipe => {
+        return props.favoriteList.includes(recipe);
+    };
 
   return (
     <View style={styles.container}>
@@ -197,5 +190,4 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
 });
-
 export default RecipeList;

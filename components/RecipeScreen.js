@@ -17,16 +17,14 @@ const RecipeScreen = props => {
 
   const imageData = recipe.image;
   const dataUri = `data:image/png;base64,${imageData}`;
+  
+  const handleCookedUndo = () => {
+    setCount(count - 1);
+  };
 
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollviewstyle}>
-        {/*<View style={styles.header}>*/}
-        {/*  <Image*/}
-        {/*    style={styles.logo}*/}
-        {/*    source={require('../assets/icons/FlavorFolioSmallIcon.png')}*/}
-        {/*  />*/}
-        {/*</View>*/}
         <View style={styles.recipeContainer}>
           <Text style={styles.recipeName}>{recipe.title}</Text>
 
@@ -45,13 +43,24 @@ const RecipeScreen = props => {
 
           <View style={styles.cookedContainer}>
             <Text style={styles.cookedText}>
-              How many times have you cooked this meal?
+              Cooking counter:
             </Text>
-            <View style={styles.row}>
-              <View style={styles.row}>
                 <Text style={styles.cookedCount}>{count}</Text>
-                <Button title="Cooked" onPress={handleCookedPress} />
-              </View>
+
+            <View style={styles.buttonupdowncontainer}>
+            <TouchableOpacity
+              style={styles.buttonupdown}
+              onPress={handleCookedPress} >
+              <Image source={require("../assets/icons/Up.png")}
+              style={styles.updown}/>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.buttonupdown}
+              onPress={handleCookedUndo} >
+              <Image source={require("../assets/icons/Down.png")}
+                     style={styles.updown}/>
+            </TouchableOpacity>
             </View>
           </View>
 
@@ -148,8 +157,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   cookedContainer: {
+    flexDirection: "row",
+    alignSelf: "center",
     marginTop: 10,
+    alignItems: 'center',
   },
+
   cookedText: {
     fontSize: 15,
     marginRight: 10,
@@ -247,7 +260,7 @@ const styles = StyleSheet.create({
     borderColor: "#CCC",
     borderRadius: 10,
     padding: 10,
-    backgroundColor: "#F8F8F8", // Hintergrundfarbe des Buttons
+    backgroundColor: "#F8F8F8",
     elevation: 5,
     overflow: "hidden",
   },
@@ -270,6 +283,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  updown:{
+    width: 20,
+    height: 10,
+    alignSelf: "center",
+  },
+  buttonupdowncontainer: {
+    marginRight: 10,
+  },
+  buttonupdown:{
+    borderWidth: 2,
+    borderColor: "#CCC",
+    borderRadius: 10,
+    padding: 10,
+    backgroundColor: "#F8F8F8",
+    elevation: 5,
+    overflow: "hidden",
+    width: 60,
+  }
 });
 
 export default RecipeScreen;
