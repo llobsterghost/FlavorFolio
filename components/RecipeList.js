@@ -32,12 +32,26 @@ const RecipeList = props => {
     }
   };
 
-  const handleDeleteRecipe = index => {
+  const handleDeleteRecipe = async (index) => {
+    const recipeToDelete = props.recipeList[index];
+  
+    try {
+      await fetch(URL + `deleterecipe/${recipeToDelete.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${props.token}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  
     const newRecipeList = [...props.recipeList];
     newRecipeList.splice(index, 1);
     props.setRecipeList(newRecipeList);
-
-    if (props.favoriteList.includes(props.recipeList[index])) {
+  
+    if (props.favoriteList.includes(recipeToDelete)) {
       const newFavoriteList = [...props.favoriteList];
       newFavoriteList.splice(index, 1);
       props.setFavoriteList(newFavoriteList);
