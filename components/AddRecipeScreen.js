@@ -376,8 +376,8 @@ alert('Recipe saved successfully');
         <View style={styles.buttonContainer}>
             {isEdit ? (
                 <TouchableOpacity
-                style={styles.editButton}
-                onPress={handleUpdate()}
+                  style={styles.editButton}
+                  onPress={handleUpdate}
                 >
                     <Text style={styles.saveButtonText}>Edit</Text>
                 </TouchableOpacity>) : (
@@ -388,9 +388,6 @@ alert('Recipe saved successfully');
                     <Text style={styles.saveButtonText}>Save</Text>
                 </TouchableOpacity>
             )}
-
-
-
         </View>
       </ScrollView>
   );
@@ -541,6 +538,16 @@ const styles = StyleSheet.create({
     marginLeft: 6,
     alignItems: 'center',
   },
+  editButton: {
+    backgroundColor: '#0B3D91',
+    padding: 10,
+    borderRadius: 5,
+    flex: 1,
+    marginRight: 6,
+    marginLeft: 6,
+    alignItems: 'center',
+  }
+
 });
 
 export default AddRecipeScreen;
