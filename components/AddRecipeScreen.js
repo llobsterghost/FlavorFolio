@@ -255,14 +255,6 @@ const AddRecipeScreen = props => {
     }
   };
 
-    function getImageExtension(imageData) {
-        if (imageData.indexOf('image/jpeg') === 0) {
-            return 'jpeg';
-        } else if (imageData.indexOf('image/png') === 0) {
-            return 'png';
-        }
-    }
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
