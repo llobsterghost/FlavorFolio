@@ -14,7 +14,7 @@ const App = () => {
   const [recipeList, setRecipeList] = useState([]);
   const [favoriteList, setFavoriteList] = useState([]);
 
-  const URL = "https://20231004t113619-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/readallrecipes";
+  const URL = "https://20231004t113619-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/";
 
   const addRecipe = recipe => {
     setRecipeList([...recipeList, recipe]);
@@ -23,7 +23,7 @@ const App = () => {
   const fetchRecipes = async () => {
     try {
       const response = await fetch(
-        URL,
+        URL + "readallrecipes",
       );
       const data = await response.json();
       setRecipeList(data);

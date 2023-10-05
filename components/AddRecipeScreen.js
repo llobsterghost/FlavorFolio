@@ -21,6 +21,8 @@ import StarRating from 'react-native-star-rating-widget';
 const AddRecipeScreen = props => {
   const recipe = props.route?.params?.recipe;
   const isEdit = props.route.params?.isEdit;
+  const URL = props.route.params?.URL;
+  console.log('URL: ', URL);
 
   const [recipeName, setRecipeName] = useState(recipe ? recipe.title : '');
   const [recipeDescription, setRecipeDescription] = useState(
@@ -168,7 +170,7 @@ const AddRecipeScreen = props => {
 
     try {
       const response = await fetch(
-        'https://20231004t113619-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/addrecipe',
+        URL + 'addrecipe',
         {
           method: 'POST',
           headers: {
@@ -231,7 +233,7 @@ const AddRecipeScreen = props => {
 
     try {
       const response = await fetch(
-        'https://20231004t113619-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/updaterecipe',
+        URL + 'updaterecipe',
         {
           method: 'PUT',
           headers: {

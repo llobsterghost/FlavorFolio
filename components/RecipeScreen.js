@@ -6,6 +6,7 @@ import StarRating from 'react-native-star-rating-widget';
 
 const RecipeScreen = props => {
   const { recipe } = props.route.params;
+  const { URL } = props.route.params;
   const [count, setCount] = useState(0);
 
   const isEdit = true;
@@ -91,7 +92,7 @@ const RecipeScreen = props => {
             <Button
               title="Edit"
               onPress={() =>
-                props.navigation.navigate('AddRecipe', {recipe: recipe, isEdit: isEdit})
+                props.navigation.navigate('AddRecipe', {recipe: recipe, isEdit: isEdit, URL: URL})
               }
             />
           </View>
