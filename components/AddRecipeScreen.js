@@ -21,6 +21,7 @@ const AddRecipeScreen = props => {
   const recipe = props.route?.params?.recipe;
   const isEdit = props.route.params?.isEdit;
   const URL = props.route.params?.URL;
+  const image = props.route.params?.image;
 
   const [recipeName, setRecipeName] = useState(recipe ? recipe.title : '');
   const [recipeDescription, setRecipeDescription] = useState(
@@ -30,9 +31,7 @@ const AddRecipeScreen = props => {
     recipe ? recipe.ingredients : '',
   );
   const [howToCook, setHowToCook] = useState(recipe ? recipe.preparation : '');
-  const [selectedImage, setSelectedImage] = useState(
-    recipe ? recipe.image : null,
-  );
+  const [selectedImage, setSelectedImage] = useState(recipe ? image : null);
 
   const [level, setLevel] = useState(recipe ? recipe.difficultyLevel : 'Easy');
   const [type, setType] = useState(recipe ? recipe.type : 'Pre-meal');
@@ -153,6 +152,11 @@ const AddRecipeScreen = props => {
       }
     }
 
+    if (!selectedImage) {
+      alert('Please select an image');
+      return;
+    }
+
     const recipeData = {
       title: recipeName,
       description: recipeDescription,
@@ -167,21 +171,18 @@ const AddRecipeScreen = props => {
     };
 
     try {
-      const response = await fetch(
-        URL + 'addrecipe',
-        {
+      const response = await fetch(URL + 'addrecipe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(recipeData),
-      },
-      );
+      });
 
       if (response.ok) {
         console.log('Recipe saved successfully');
-alert('Recipe saved successfully');
-        props.navigation.goBack();
+        alert('Recipe saved successfully');
+        props.navigation.navigate("Home");
       } else {
         console.error('Response code:', response.status);
         response.text().then(responseData => {
@@ -232,16 +233,13 @@ alert('Recipe saved successfully');
     };
 
     try {
-      const response = await fetch(
-        URL + 'updaterecipe',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(recipeData),
+      const response = await fetch(URL + 'updaterecipe', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify(recipeData),
+      });
 
       if (response.ok) {
         console.log('Recipe updated successfully');
@@ -255,7 +253,7 @@ alert('Recipe saved successfully');
     } catch (error) {
       console.error('Error updating recipe:', error);
     }
-  }
+  };
 
     function getImageExtension(imageData) {
         if (imageData.indexOf('image/jpeg') === 0) {
@@ -280,11 +278,7 @@ alert('Recipe saved successfully');
       <View style={{flex: 1, justifyContent: 'center'}}>
         {selectedImage ? (
           <Image
-            //source={{uri: selectedImage}} //for working AddRecipe
-            source={{uri: `data:image/png;base64,${selectedImage}`}} //for working modifyRecipe
-                  //source={{ //TODO: test if both screens are working with this!
-                    //uri: `data:image/${getImageExtension(selectedImage)};base64,${selectedImage}`,
-                  //}}
+            source={{uri: selectedImage}}
             style={styles.image}
             resizeMode="contain"
           />

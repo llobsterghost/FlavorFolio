@@ -15,6 +15,9 @@ const RecipeScreen = props => {
     setCount(count + 1);
   };
 
+  const imageData = recipe.image;
+  const dataUri = `data:image/png;base64,${imageData}`;
+  
   const handleCookedUndo = () => {
     setCount(count - 1);
   };
@@ -28,7 +31,7 @@ const RecipeScreen = props => {
           <View style={styles.imageContainer}>
             <Image
               style={styles.image}
-              source={{ uri: `data:image/png;base64,${recipe.image}` }}
+              source={{ uri: dataUri }}
             />
           </View>
           <Text style={styles.recipeDescription}>{recipe.description}</Text>
@@ -105,7 +108,7 @@ const RecipeScreen = props => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.customButton}
-              onPress={() => props.navigation.navigate("AddRecipe", { recipe: recipe, isEdit: isEdit, URL: URL })}
+              onPress={() => props.navigation.navigate("AddRecipe", { recipe: recipe, isEdit: isEdit, URL: URL, image: dataUri })}
             >
               <Text style={styles.buttonText}>Edit Recipe</Text>
             </TouchableOpacity>
