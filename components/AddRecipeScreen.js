@@ -22,7 +22,6 @@ const AddRecipeScreen = props => {
   const recipe = props.route?.params?.recipe;
   const isEdit = props.route.params?.isEdit;
   const URL = props.route.params?.URL;
-  console.log('URL: ', URL);
 
   const [recipeName, setRecipeName] = useState(recipe ? recipe.title : '');
   const [recipeDescription, setRecipeDescription] = useState(
