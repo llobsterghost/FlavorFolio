@@ -3,9 +3,13 @@ import { StyleSheet, View, Image, Text, Button, TouchableOpacity } from "react-n
 import { ScrollView } from "react-native-gesture-handler";
 import StarRating from "react-native-star-rating-widget";
 
+
 const RecipeScreen = props => {
   const { recipe } = props.route.params;
+  const { URL } = props.route.params;
   const [count, setCount] = useState(0);
+
+  const isEdit = true;
 
   const handleCookedPress = () => {
     setCount(count + 1);
@@ -92,7 +96,7 @@ const RecipeScreen = props => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.customButton}
-              onPress={() => props.navigation.navigate("AddRecipe", { recipe: recipe })}
+              onPress={() => props.navigation.navigate("AddRecipe", { recipe: recipe, isEdit: isEdit, URL: URL })}
             >
               <Text style={styles.buttonText}>Edit Recipe</Text>
             </TouchableOpacity>
