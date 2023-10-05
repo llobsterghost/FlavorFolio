@@ -181,6 +181,8 @@ const AddRecipeScreen = props => {
 
       if (response.ok) {
         console.log('Recipe saved successfully');
+        alert('Recipe saved successfully');
+        props.navigation.goBack();
       } else {
         console.error('Response code:', response.status);
         response.text().then(responseData => {
@@ -257,27 +259,35 @@ const AddRecipeScreen = props => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Add Recipe</Text>
-      </View>
-      <TextInput
-        style={styles.input}
-        placeholder="Recipe Name"
-        value={recipeName}
-        onChangeText={text => setRecipeName(text)}
-      />
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        {selectedImage ? (
-          <Image
-            //source={{uri: selectedImage}}
-            source={{uri: `data:image/png;base64,${selectedImage}`}}
-            style={styles.image}
-            resizeMode="contain"
-          />
-        ) : (
-          <View style={styles.placeholderContainer}>
-            <Text style={styles.placeholderText}>No Image Selected</Text>
+
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Add Recipe</Text>
+        </View>
+        <TextInput
+            style={styles.input}
+            placeholder="Recipe Name"
+            value={recipeName}
+            onChangeText={text => setRecipeName(text)}
+        />
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          {selectedImage ? (
+              <Image
+                  source={{uri: selectedImage}}
+                  //source={{uri: `data:image/png;base64,${selectedImage}`}}
+                  style={styles.image}
+                  resizeMode="contain"
+              />
+          ) : (
+              <View style={styles.placeholderContainer}>
+                <Text style={styles.placeholderText}>No Image Selected</Text>
+              </View>
+          )}
+          <View style={{marginTop: 20}}>
+            <Button title="Choose from Device" onPress={openImagePicker} />
+          </View>
+          <View style={{marginTop: 20, marginBottom: 50}}>
+            <Button title="Open Camera" onPress={handleCameraLaunch} />
           </View>
         )}
         <View style={{marginTop: 20}}>

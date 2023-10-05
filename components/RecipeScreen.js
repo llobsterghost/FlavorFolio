@@ -1,8 +1,8 @@
-import { is } from '@babel/types';
-import React, {useState} from 'react';
-import {StyleSheet, View, Image, Text, Button} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import StarRating from 'react-native-star-rating-widget';
+import React, { useState } from "react";
+import { StyleSheet, View, Image, Text, Button, TouchableOpacity } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import StarRating from "react-native-star-rating-widget";
+
 
 const RecipeScreen = props => {
   const { recipe } = props.route.params;
@@ -33,21 +33,22 @@ const RecipeScreen = props => {
               source={{ uri: `data:image/png;base64,${recipe.image}` }}
             />
           </View>
+          <Text style={styles.recipeDescription}>{recipe.description}</Text>
 
           <View style={styles.ratingContainer}>
-            <Text style={styles.recipeDescription}>{recipe.description}</Text>
-            <View style={styles.ratingContainer}>
-              <StarRating rating={recipe.stars} onChange={() => {}}/>
-            </View>
+            <StarRating rating={recipe.stars} onChange={() => {
+            }} />
           </View>
 
           <View style={styles.cookedContainer}>
             <Text style={styles.cookedText}>
               How many times have you cooked this meal?
             </Text>
-            <View class={styles.row}>
-            <Text style={styles.cookedCount}>{count}</Text>
-            <Button title="Cooked" onPress={handleCookedPress} />
+            <View style={styles.row}>
+              <View style={styles.row}>
+                <Text style={styles.cookedCount}>{count}</Text>
+                <Button title="Cooked" onPress={handleCookedPress} />
+              </View>
             </View>
           </View>
 
@@ -55,26 +56,30 @@ const RecipeScreen = props => {
             <View style={styles.timeContainer}>
               <Image
                 style={styles.timeIcon}
-                source={require('../assets/icons/time.png')}
+                source={require("../assets/icons/time.png")}
               />
-              <Text style={styles.timeText}>Prep: {recipe.preptime}</Text>
-              <Text style={styles.timeText}>Cook: {recipe.cooktime}</Text>
+              <View>
+                <Text style={styles.timeText}>Prep: {recipe.preptime}</Text>
+                <Text style={styles.timeText}>Cook: {recipe.cooktime}</Text>
+              </View>
             </View>
 
-            <View style={styles.levelContainer}>
-              <Image
-                style={styles.levelIcon}
-                source={require("../assets/icons/level.png")}
-              />
-              <Text style={styles.levelText}>{recipe.difficultyLevel}</Text>
-            </View>
+            <View style={styles.levelTypeContainer}>
+              <View style={styles.levelContainer}>
+                <Image
+                  style={styles.levelIcon}
+                  source={require("../assets/icons/level.png")}
+                />
+                <Text style={styles.levelText}>{recipe.difficultyLevel}</Text>
+              </View>
 
-            <View style={styles.typeContainer}>
-              <Image
-                style={styles.typeIcon}
-                source={require("../assets/icons/type.png")}
-              />
-              <Text style={styles.typeText}>{recipe.type}</Text>
+              <View style={styles.typeContainer}>
+                <Image
+                  style={styles.typeIcon}
+                  source={require("../assets/icons/type.png")}
+                />
+                <Text style={styles.typeText}>{recipe.type}</Text>
+              </View>
             </View>
           </View>
 
@@ -89,12 +94,12 @@ const RecipeScreen = props => {
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button
-              title="Edit"
-              onPress={() =>
-                props.navigation.navigate('AddRecipe', {recipe: recipe, isEdit: isEdit, URL: URL})
-              }
-            />
+            <TouchableOpacity
+              style={styles.customButton}
+              onPress={() => props.navigation.navigate("AddRecipe", { recipe: recipe, isEdit: isEdit, URL: URL })}
+            >
+              <Text style={styles.buttonText}>Edit Recipe</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -133,19 +138,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 10,
   },
+
   ratingContainer: {
     flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  infoContainer: {
-    padding: 20,
-    flexDirection: "row",
-    alignItems: "center",
+    alignSelf: "center",
+    marginTop: 10,
   },
   cookedContainer: {
-    alignItems: "center",
-    marginBottom: 10,
+    marginTop: 10,
   },
   cookedText: {
     fontSize: 15,
@@ -156,26 +156,38 @@ const styles = StyleSheet.create({
     marginRight: 10,
     fontWeight: "bold",
   },
-  recipeIngredients: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  recipeInstructions: {
-    fontSize: 18,
-    marginBottom: 10,
+
+  infoContainer: {
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 10,
   },
   timeContainer: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  levelTypeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  recipeIngredients: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  recipeInstructions: {
+    fontSize: 16,
     marginBottom: 10,
   },
   timeIcon: {
-    width: 20,
-    height: 20,
+    width: 35,
+    height: 35,
     marginRight: 10,
   },
   timeText: {
-    fontSize: 18,
+    fontSize: 15,
     marginRight: 10,
   },
   levelContainer: {
@@ -184,13 +196,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   levelIcon: {
-    width: 20,
-    height: 20,
+    width: 35,
+    height: 35,
     marginRight: 10,
   },
   levelText: {
-    fontSize: 18,
-    marginRight: 10,
+    fontSize: 15,
+    marginRight: 20,
   },
   typeContainer: {
     flexDirection: "row",
@@ -198,40 +210,48 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   typeIcon: {
-    width: 20,
-    height: 20,
+    width: 35,
+    height: 35,
     marginRight: 10,
   },
   typeText: {
-    fontSize: 18,
-    marginRight: 10,
+    fontSize: 15,
+    marginRight: 5,
   },
   ingridientsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
+    marginTop: 20,
   },
   ingridientsText: {
     fontSize: 18,
     marginRight: 10,
+    fontWeight: "bold",
+    marginBottom: 5,
   },
   instructionsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
+    marginTop: 20,
   },
   instructionsText: {
     fontSize: 18,
     marginRight: 10,
+    fontWeight: "bold",
+    marginBottom: 5,
   },
   buttonContainer: {
-    width: "100%",
+    marginBottom: 20,
+  },
+  customButton: {
+    borderWidth: 2,
+    borderColor: "#CCC",
+    borderRadius: 10,
     padding: 10,
-    backgroundColor: "blue",
+    backgroundColor: "#F8F8F8", // Hintergrundfarbe des Buttons
+    elevation: 5,
+    overflow: "hidden",
   },
   buttonText: {
-    color: "#fff",
+    color: "#7c7b7b",
     fontSize: 18,
+    fontWeight: "bold",
     textAlign: "center",
   },
   imageContainer: {
@@ -246,7 +266,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10,
   },
 });
 

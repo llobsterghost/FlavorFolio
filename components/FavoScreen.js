@@ -8,7 +8,7 @@ const FavoScreen = props => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image style={styles.yourfavoriteIcon} source={require('../assets/icons/YourFavoritesIcon.png')} />
+        <Image style={styles.yourfavoriteIcon} source={require('../assets/icons/FavouritesHeading.png')} />
         <Image style={styles.logo} source={require('../assets/icons/FlavorFolioSmallIcon.png')} />
       </View>
      <FavoRecipeList favoriteList={favoriteList} setFavoriteList={setFavoriteList} navigation={props.navigation} />
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     right: 20,
   },
   yourfavoriteIcon:{
-    width: 250,
-    height: 40,
+    width: 255,
+    height: 38,
     marginTop: 5,
   },
 });
