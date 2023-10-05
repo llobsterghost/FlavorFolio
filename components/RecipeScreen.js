@@ -1,26 +1,26 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image, Text, Button, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import StarRating from "react-native-star-rating-widget";
-
 
 const RecipeScreen = props => {
   const { recipe } = props.route.params;
   const { URL } = props.route.params;
-  const [count, setCount] = useState(0);
 
   const isEdit = true;
 
-  const handleCookedPress = () => {
-    setCount(count + 1);
+  const handleCookedPress = async () => {
+    recipe.cookedCounter + 1;
+  };
+  
+  const handleCookedUndo = async () => {
+    if (count > 0) {
+      recipe.cookedCounter - 1;
+    }
   };
 
   const imageData = recipe.image;
   const dataUri = `data:image/png;base64,${imageData}`;
-  
-  const handleCookedUndo = () => {
-    setCount(count - 1);
-  };
 
   return (
     <View style={styles.container}>
@@ -45,7 +45,7 @@ const RecipeScreen = props => {
             <Text style={styles.cookedText}>
               Cooking counter:
             </Text>
-                <Text style={styles.cookedCount}>{count}</Text>
+                <Text style={styles.cookedCount}>{recipe.cookedCounter}</Text>
 
             <View style={styles.buttonupdowncontainer}>
             <TouchableOpacity

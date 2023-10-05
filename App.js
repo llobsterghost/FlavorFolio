@@ -14,7 +14,7 @@ const App = () => {
   const [recipeList, setRecipeList] = useState([]);
   const [favoriteList, setFavoriteList] = useState([]);
 
-  const URL = "https://20231005t155218-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/";
+  const URL = "https://20231005t155840-dot-crossplatform247-397411.ew.r.appspot.com/rest/recipeservice/";
 
   const addRecipe = recipe => {
     setRecipeList([...recipeList, recipe]);
