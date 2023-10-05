@@ -32,9 +32,7 @@ const AddRecipeScreen = props => {
     recipe ? recipe.ingredients : '',
   );
   const [howToCook, setHowToCook] = useState(recipe ? recipe.preparation : '');
-  const [selectedImage, setSelectedImage] = useState(
-    recipe ? image : null,
-  );
+  const [selectedImage, setSelectedImage] = useState(recipe ? image : null);
 
   const [level, setLevel] = useState(recipe ? recipe.difficultyLevel : 'Easy');
   const [type, setType] = useState(recipe ? recipe.type : 'Pre-meal');
@@ -155,6 +153,11 @@ const AddRecipeScreen = props => {
       }
     }
 
+    if (!selectedImage) {
+      alert('Please select an image');
+      return;
+    }
+
     const recipeData = {
       title: recipeName,
       description: recipeDescription,
@@ -169,21 +172,18 @@ const AddRecipeScreen = props => {
     };
 
     try {
-      const response = await fetch(
-        URL + 'addrecipe',
-        {
+      const response = await fetch(URL + 'addrecipe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(recipeData),
-      },
-      );
+      });
 
       if (response.ok) {
         console.log('Recipe saved successfully');
-alert('Recipe saved successfully');
-        props.navigation.goBack();
+        alert('Recipe saved successfully');
+        props.navigation.navigate("Home");
       } else {
         console.error('Response code:', response.status);
         response.text().then(responseData => {
@@ -234,16 +234,13 @@ alert('Recipe saved successfully');
     };
 
     try {
-      const response = await fetch(
-        URL + 'updaterecipe',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(recipeData),
+      const response = await fetch(URL + 'updaterecipe', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify(recipeData),
+      });
 
       if (response.ok) {
         console.log('Recipe updated successfully');
@@ -257,7 +254,7 @@ alert('Recipe saved successfully');
     } catch (error) {
       console.error('Error updating recipe:', error);
     }
-  }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -378,7 +375,7 @@ alert('Recipe saved successfully');
         <Button title="Update" onPress={handleUpdate} />
       ) : (
         <Button title="Add" onPress={handleSave} />
-)}
+      )}
     </ScrollView>
   );
 };
