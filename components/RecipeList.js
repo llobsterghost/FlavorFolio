@@ -18,6 +18,7 @@ const RecipeList = props => {
     setFavoriteList,
     navigation,
     filteredRecipeList,
+    URL,
   } = props;
 
   const handleFavorite = index => {
@@ -64,7 +65,7 @@ const RecipeList = props => {
             )}>
             <TouchableOpacity
               onPress={() =>
-                props.navigation.navigate('Recipe', {recipe: recipe})
+                props.navigation.navigate('Recipe', {recipe: recipe, URL: URL})
               }>
               <View style={styles.listItemStyle} key={index}>
                 <View style={styles.row}>

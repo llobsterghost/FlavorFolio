@@ -25,7 +25,7 @@ const HomeScreen = props => {
 
   const handleRefresh = async () => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch(URL + "readallrecipes");
       const data = await response.json();
       setRecipeList(data);
     } catch (error) {
@@ -55,7 +55,7 @@ const HomeScreen = props => {
           source={require('../assets/icons/FlavorFolioIcon.png')}
         />
         <TouchableOpacity
-          onPress={() => props.navigation.navigate("AddRecipe")}>
+          onPress={() => props.navigation.navigate("AddRecipe", {URL: URL})}>
           <Image
             style={styles.iconAdd}
             source={require('../assets/icons/IconAddPage.png')}
@@ -91,6 +91,7 @@ const HomeScreen = props => {
         favoriteList={favoriteList}
         setFavoriteList={setFavoriteList}
         filteredRecipeList={filteredRecipeList}
+        URL={URL}
       />
     </View>
   );
