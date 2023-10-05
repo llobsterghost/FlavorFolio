@@ -176,8 +176,8 @@ const styles = StyleSheet.create({
     height: 90,
   },
   imagecheck: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
   },
   recipeHeader: {
     flexDirection: 'row',

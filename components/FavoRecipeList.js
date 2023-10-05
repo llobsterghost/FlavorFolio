@@ -1,4 +1,5 @@
 import { Text, View, ScrollView, StyleSheet, TouchableOpacity, Image } from "react-native";
+import StarRating from "react-native-star-rating-widget";
 
 const FavoRecipeList = (props) => {
   const { favoriteList, setFavoriteList, navigation } = props;
@@ -21,31 +22,36 @@ const FavoRecipeList = (props) => {
       {favoriteList.map((recipe, index) => (
         <TouchableOpacity
           key={index}
-          onPress={() => props.navigation.navigate('Recipe', { recipe: recipe })}>
+          onPress={() => props.navigation.navigate("Recipe", { recipe: recipe })}>
           <View style={styles.listItemStyle} key={index}>
-            <View style={styles.imageContainer}>
-              <Image
-                style={styles.image}
-                source={{ uri: `data:image/png;base64,${recipe.image}` }}
-              />
-            </View>
-            <View style={styles.textContainer}>
-              <View style={styles.recipeHeader}>
-                <Text style={styles.recipeName}>
-                  {truncateText(recipe.title, 20)}
-                </Text>
-                <TouchableOpacity onPress={() => handleUnFavorite(index)}>
-                  <Image
-                    source={require("../assets/icons/Favourite-checked.png")}
-                    style={styles.imagechecked}
-                  />
-                </TouchableOpacity>
+            <View style={styles.row}>
+              <View style={styles.imageContainer}>
+                <Image
+                  style={styles.image}
+                  source={{ uri: `data:image/png;base64,${recipe.image}` }}
+                />
               </View>
-              <Text style={styles.recipeDescription}>
-                {recipe.description}
-              </Text>
+              <View style={styles.textContainer}>
+                <View style={styles.recipeHeader}>
+                  <Text style={styles.recipeName}>
+                    {truncateText(recipe.title, 20)}
+                  </Text>
+                  <TouchableOpacity onPress={() => handleUnFavorite(index)}>
+                    <Image
+                      source={require("../assets/icons/Favourite-checked.png")}
+                      style={styles.imagechecked}
+                    />
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.recipeDescription}>
+                  {recipe.description}
+                </Text>
+              </View>
             </View>
-            <View style={styles.ratingContainer}></View>
+            <View style={styles.ratingContainer}>
+              <StarRating rating={recipe.stars} onChange={() => {
+              }} />
+            </View>
           </View>
         </TouchableOpacity>
       ))}
@@ -61,8 +67,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   listItemStyle: {
-    flexDirection: "row",
-    alignItems: "center",
     borderWidth: 2,
     borderColor: "#CCC",
     borderRadius: 10,
@@ -74,6 +78,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     marginRight: 10,
+    justifyContent: 'center',
   },
   textContainer: {
     flex: 1,
@@ -97,18 +102,21 @@ const styles = StyleSheet.create({
     height: 90,
   },
   imagechecked: {
-    width: 35,
-    height: 35,
+    width: 40,
+    height: 40,
   },
   recipeHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 5,
   },
+  row: {
+    flexDirection: "row",
+  },
   ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
 });
 
