@@ -24,36 +24,39 @@ const RecipeList = props => {
   const handleFavorite = index => {
     const recipe = recipeList[index];
     if (ifFavorite(recipe)) {
-      setFavoriteList(favoriteList.filter((fav) => fav.id !== recipe.id));
+      setFavoriteList(favoriteList.filter(fav => fav.id !== recipe.id));
     } else {
-      if (!favoriteList.some((fav) => fav.id === recipe.id)) {
+      if (!favoriteList.some(fav => fav.id === recipe.id)) {
         setFavoriteList([...favoriteList, recipe]);
       }
     }
   };
 
-  const handleDeleteRecipe = async (index) => {
+  const handleDeleteRecipe = async index => {
     const recipeToDelete = props.recipeList[index];
-  
-    try {
-      await fetch(URL + `deleterecipe/${recipeToDelete.id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${props.token}`,
-        },
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  
+
+    // try {
+    //   await fetch(URL + `deleterecipe/${recipeToDelete.id}`, {
+    //     method: 'DELETE',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization: `Bearer ${props.token}`,
+    //     },
+    //   });
+    // } catch (error) {
+    //   console.error(error);
+    // }
+
     const newRecipeList = [...props.recipeList];
     newRecipeList.splice(index, 1);
     props.setRecipeList(newRecipeList);
-  
-    if (props.favoriteList.includes(recipeToDelete)) {
+
+    const favoriteIndex = props.favoriteList.findIndex(
+      recipe => recipe.id === recipeToDelete.id,
+    );
+    if (favoriteIndex !== -1) {
       const newFavoriteList = [...props.favoriteList];
-      newFavoriteList.splice(index, 1);
+      newFavoriteList.splice(favoriteIndex, 1);
       props.setFavoriteList(newFavoriteList);
     }
   };
@@ -86,30 +89,33 @@ const RecipeList = props => {
                   <View style={styles.imageContainer}>
                     <Image
                       style={styles.image}
-                      source={{ uri: `data:image/png;base64,${recipe.image}` }}
+                      source={{uri: `data:image/png;base64,${recipe.image}`}}
                     />
                   </View>
                   <View style={styles.textContainer}>
                     <View style={styles.recipeHeader}>
                       <Text style={styles.recipeName}>{recipe.title}</Text>
-                      <TouchableOpacity onPress={() => handleFavorite(index)}>{ifFavorite(recipe) ? (
-                            <Image
-                              source={require('../assets/icons/Favourite-checked.png')}
-                              style={styles.imagecheck}
-                            />
-                          ) : (
-                        <Image
-                          source={require("../assets/icons/Favourite-check.png")}
-                          style={styles.imagecheck}
-                        />
-                      )}</TouchableOpacity>
+                      <TouchableOpacity onPress={() => handleFavorite(index)}>
+                        {ifFavorite(recipe) ? (
+                          <Image
+                            source={require('../assets/icons/Favourite-checked.png')}
+                            style={styles.imagecheck}
+                          />
+                        ) : (
+                          <Image
+                            source={require('../assets/icons/Favourite-check.png')}
+                            style={styles.imagecheck}
+                          />
+                        )}
+                      </TouchableOpacity>
                     </View>
-                    <Text style={styles.recipeDescription}>{recipe.description}</Text>
+                    <Text style={styles.recipeDescription}>
+                      {recipe.description}
+                    </Text>
                   </View>
                 </View>
                 <View style={styles.ratingContainer}>
-                  <StarRating rating={recipe.stars} onChange={() => {
-                  }} />
+                  <StarRating rating={recipe.stars} onChange={() => {}} />
                 </View>
               </View>
             </TouchableOpacity>
@@ -123,53 +129,53 @@ const RecipeList = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
+    width: '100%',
   },
   scrollviewstyle: {
-    width: "100%",
+    width: '100%',
     marginTop: 15,
   },
   row: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   listItemStyle: {
     borderWidth: 2,
-    borderColor: "#CCC",
+    borderColor: '#CCC',
     borderRadius: 10,
     padding: 10,
     marginBottom: 15,
-    backgroundColor: "#F8F8F8",
+    backgroundColor: '#F8F8F8',
     elevation: 5,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   imageContainer: {
     marginRight: 10,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   textContainer: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   recipeName: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   recipeDescription: {
     fontSize: 12,
-    color: "#666",
+    color: '#666',
     marginBottom: 5,
   },
   deleteButton: {
-    backgroundColor: "red",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 100,
-    height: "100%",
+    height: '100%',
   },
   deleteButtonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 10,
   },
   image: {
@@ -181,14 +187,14 @@ const styles = StyleSheet.create({
     height: 30,
   },
   recipeHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 5,
   },
   ratingContainer: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 });
 
