@@ -171,17 +171,17 @@ const AddRecipeScreen = props => {
       const response = await fetch(
         URL + 'addrecipe',
         {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(recipeData),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify(recipeData),
+      },
       );
 
       if (response.ok) {
         console.log('Recipe saved successfully');
-        alert('Recipe saved successfully');
+alert('Recipe saved successfully');
         props.navigation.goBack();
       } else {
         console.error('Response code:', response.status);
@@ -259,37 +259,35 @@ const AddRecipeScreen = props => {
   }
 
   return (
-
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Add Recipe</Text>
-        </View>
-        <TextInput
-            style={styles.input}
-            placeholder="Recipe Name"
-            value={recipeName}
-            onChangeText={text => setRecipeName(text)}
-        />
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          {selectedImage ? (
-              <Image
-                  source={{uri: selectedImage}}
-                  //source={{uri: `data:image/png;base64,${selectedImage}`}}
-                  style={styles.image}
-                  resizeMode="contain"
-              />
-          ) : (
-              <View style={styles.placeholderContainer}>
-                <Text style={styles.placeholderText}>No Image Selected</Text>
-              </View>
-          )}
-          <View style={{marginTop: 20}}>
-            <Button title="Choose from Device" onPress={openImagePicker} />
-          </View>
-          <View style={{marginTop: 20, marginBottom: 50}}>
-            <Button title="Open Camera" onPress={handleCameraLaunch} />
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Add Recipe</Text>
+      </View>
+      <TextInput
+        style={styles.input}
+        placeholder="Recipe Name"
+        value={recipeName}
+        onChangeText={text => setRecipeName(text)}
+      />
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        {selectedImage ? (
+          <Image
+            //source={{uri: selectedImage}}
+            source={{uri: `data:image/png;base64,${selectedImage}`}}
+            style={styles.image}
+            resizeMode="contain"
+          />
+        ) : (
+          <View style={styles.placeholderContainer}>
+            <Text style={styles.placeholderText}>No Image Selected</Text>
           </View>
         )}
+        <View style={{marginTop: 20}}>
+          <Button title="Choose from Device" onPress={openImagePicker} />
+        </View>
+        <View style={{marginTop: 20, marginBottom: 50}}>
+          <Button title="Open Camera" onPress={handleCameraLaunch} />
+        </View>
         <View style={{marginTop: 20}}>
           <Button title="Choose from Device" onPress={openImagePicker} />
         </View>
@@ -311,7 +309,7 @@ const AddRecipeScreen = props => {
           style={styles.input}
           placeholder="Prep Time (minutes)"
           keyboardType="numeric"
-          value={preptime}
+          value={preptime.toString()}
           onChangeText={text => setPreptime(text)}
         />
 
@@ -319,7 +317,7 @@ const AddRecipeScreen = props => {
           style={styles.input}
           placeholder="Cook Time (minutes)"
           keyboardType="numeric"
-          value={cooktime}
+          value={cooktime.toString()}
           onChangeText={text => setCooktime(text)}
         />
       </View>
@@ -380,7 +378,7 @@ const AddRecipeScreen = props => {
         <Button title="Update" onPress={handleUpdate} />
       ) : (
         <Button title="Add" onPress={handleSave} />
-      )}
+)}
     </ScrollView>
   );
 };
