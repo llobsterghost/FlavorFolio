@@ -22,6 +22,7 @@ const AddRecipeScreen = props => {
   const recipe = props.route?.params?.recipe;
   const isEdit = props.route.params?.isEdit;
   const URL = props.route.params?.URL;
+  const image = props.route.params?.image;
 
   const [recipeName, setRecipeName] = useState(recipe ? recipe.title : '');
   const [recipeDescription, setRecipeDescription] = useState(
@@ -32,7 +33,7 @@ const AddRecipeScreen = props => {
   );
   const [howToCook, setHowToCook] = useState(recipe ? recipe.preparation : '');
   const [selectedImage, setSelectedImage] = useState(
-    recipe ? recipe.image : null,
+    recipe ? image : null,
   );
 
   const [level, setLevel] = useState(recipe ? recipe.difficultyLevel : 'Easy');
@@ -273,7 +274,6 @@ alert('Recipe saved successfully');
         {selectedImage ? (
           <Image
             source={{uri: selectedImage}}
-            //source={{uri: `data:image/png;base64,${selectedImage}`}}
             style={styles.image}
             resizeMode="contain"
           />
