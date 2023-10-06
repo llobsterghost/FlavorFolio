@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { StyleSheet, View, Image, Text, Button, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import StarRating from "react-native-star-rating-widget";
@@ -7,19 +7,50 @@ import StarRating from "react-native-star-rating-widget";
 const RecipeScreen = props => {
   const { recipe } = props.route.params;
   const { URL } = props.route.params;
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(recipe.cookedCounter);
 
   const isEdit = true;
 
-  const handleCookedPress = () => {
-    setCount(count + 1);
-  };
-
   const imageData = recipe.image;
   const dataUri = `data:image/png;base64,${imageData}`;
-  
+
+  const handleCookedPress = async () => {
+    setCount((prevCount) => prevCount + 1);
+
+    // Update the cooked counter on the server
+    updateCookedCounter(count + 1);
+  };
+
   const handleCookedUndo = () => {
-    setCount(count - 1);
+    if (count > 0) {
+      setCount((prevCount) => prevCount - 1);
+
+      // Update the cooked counter on the server
+      updateCookedCounter(count - 1);
+    }
+  };
+
+
+  const updateCookedCounter = async (newCount) => {
+    try {
+      const response = await fetch(URL + 'updatecookedcounter/' + recipe.id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        body: newCount.toString(),
+      });
+
+      if (response.ok) {
+        // Update was successful
+        console.log('Cooked counter updated successfully');
+      } else {
+        // Update failed
+        console.error('Failed to update cooked counter');
+      }
+    } catch (error) {
+      console.error('An error occurred while updating cooked counter:', error);
+    }
   };
 
   return (
