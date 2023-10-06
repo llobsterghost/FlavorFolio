@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
+import {ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
 import {Swipeable} from 'react-native-gesture-handler';
 import StarRating from 'react-native-star-rating-widget';
 
@@ -60,6 +60,9 @@ const RecipeList = props => {
 
   return (
     <View style={styles.container}>
+      {props.isLoading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
       <ScrollView style={styles.scrollviewstyle}>
         {filteredRecipeList.map((recipe, index) => (
           <Swipeable
@@ -114,7 +117,7 @@ const RecipeList = props => {
             </TouchableOpacity>
           </Swipeable>
         ))}
-      </ScrollView>
+      </ScrollView>)}
     </View>
   );
 };

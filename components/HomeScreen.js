@@ -11,25 +11,21 @@ import RecipeList from './RecipeList';
 const HomeScreen = props => {
   const {recipeList, setRecipeList, favoriteList, setFavoriteList, URL} = props;
   const [text, setText] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
   const textInputHandler = enteredText => {
     setText(enteredText);
   };
 
-  // const refreshOnFocus = useCallback(() => {
-  //   handleRefresh();
-  // }, []);
-
-  // useEffect(() => {
-  //   const focusListener = props.navigation.addListener('focus', refreshOnFocus);
-  // }, [refreshOnFocus]);
-
   const handleRefresh = async () => {
     try {
+      setIsLoading(true);
       const response = await fetch(URL + "readallrecipes");
       const data = await response.json();
       setRecipeList(data);
+      setIsLoading(false)
     } catch (error) {
       console.error(error);
+      setIsLoading(false)
     }
   };
 
@@ -92,6 +88,7 @@ const HomeScreen = props => {
         setFavoriteList={setFavoriteList}
         filteredRecipeList={filteredRecipeList}
         URL={URL}
+        isLoading={isLoading}
       />
     </View>
   );
