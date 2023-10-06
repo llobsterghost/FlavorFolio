@@ -208,21 +208,11 @@ const AddRecipeScreen = props => {
   };
 
   const handleUpdate = async () => {
-    let imageBytes = null;
-    if (selectedImage) {
-      try {
-        const response = await fetch(selectedImage);
-        const blob = await response.blob();
-        imageBytes = await blobToBase64(blob);
-      } catch (error) {
-        console.error('Error converting image to byte[]:', error);
-      }
-    }
-
     const recipeData = {
+      id: recipe.id,
       title: recipeName,
       description: recipeDescription,
-      image: imageBytes,
+      image: image.replace(/^data:image\/(png|jpeg);base64,/, ''), // Remove the prefix
       stars: rating,
       preptime: preptime,
       cooktime: cooktime,
